@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".maket.RentGoodsActivity">
+    <RelativeLayout
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="45dp">
+        <ImageView
+            android:id="@+id/back"
+            android:padding="15dp"
+            android:src="@mipmap/back"
+            android:layout_width="50dp"
+            android:layout_height="match_parent" />
+        <TextView
+            android:textSize="16sp"
+            android:textColor="@color/black_33"
+            android:layout_centerInParent="true"
+            android:text="离我最近"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/refresh"
+        android:layout_marginTop="1dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <com.scwang.smartrefresh.layout.header.ClassicsHeader
+            android:layout_width="match_parent"
+            app:srlClassicsSpinnerStyle="FixedBehind"
+            app:srlPrimaryColor="#444"
+            app:srlAccentColor="@android:color/white"
+            android:layout_height="wrap_content">
+
+        </com.scwang.smartrefresh.layout.header.ClassicsHeader>
+        <android.support.v7.widget.RecyclerView
+
+            android:id="@+id/rv_goods"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </android.support.v7.widget.RecyclerView>
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
+</LinearLayout>

@@ -1,0 +1,614 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.example.yunchebao">
+    <!-- To auto-complete the email text field in the login form with the user's emails -->
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.READ_PROFILE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.CALL_PHONE" /> <!-- 两种provider的权限 -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" /> <!-- 仅网络定位的权限 -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" /> <!-- 环信 -->
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission
+        android:name="android.permission.ACCESS_MOCK_LOCATION"
+        tools:ignore="MockLocation" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" /> <!-- 环信 end -->
+    <uses-permission android:name="android.permission.PROCESS_OUTGOING_CALLS" />
+    <uses-permission android:name="android.permission.INTERACT_ACROSS_USERS_FULL" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.WRITE_SECURE_SETTINGS" /> <!-- 用于进行网络定位 -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" /> <!-- 用于访问GPS定位 -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" /> <!-- 用于获取运营商信息，用于支持提供运营商信息相关的接口 -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- 用于访问wifi网络信息，wifi信息会用于进行网络定位 -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" /> <!-- 用于获取wifi的获取权限，wifi信息会用来进行网络定位 -->
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" /> <!-- 用于访问网络，网络定位需要上网 -->
+    <uses-permission android:name="android.permission.INTERNET" /> <!-- 用于读取手机当前的状态 -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" /> <!-- 用于写入缓存数据到扩展存储卡 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> <!-- 用于申请调用A-GPS模块 -->
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" /> <!-- 用于申请获取蓝牙信息进行室内定位 -->
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.FLASHLIGHT" />
+
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.READ_LOGS" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_GPS" />
+    <uses-permission android:name="android.permission.ACCESS_ASSISTED_GPS" />
+    <uses-permission android:name="android.permission.ACCESS_LOCATION" />
+
+    <application
+        android:name=".MyApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/icon"
+        android:label="@string/app_name"
+        android:maxAspectRatio="2.4"
+        android:networkSecurityConfig="@xml/network_security_config"
+        android:resizeableActivity="true"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".cheyibao.newcar.AddShopCommentActivity"></activity>
+        <activity android:name=".cheyibao.newcar.NearShopActivity" />
+        <activity android:name=".mysale.SaleDetailActivity" />
+
+        <meta-data
+            android:name="com.vivo.push.api_key"
+            android:value="b4bcea82-9dbf-45aa-82d8-5555bc65257e" />
+        <meta-data
+            android:name="com.vivo.push.app_id"
+            android:value="10937" /> <!-- oppo 推送暂不支持个人开发者，所以无法在demo中演示 -->
+        <meta-data
+            android:name="OPPO_APP_KEY"
+            android:value="" />
+        <meta-data
+            android:name="OPPO_APP_SECRET"
+            android:value="" /> <!-- 华为推送 ID -->
+        <meta-data
+            android:name="com.huawei.hms.client.appid"
+            android:value="appid=100612743" /> <!-- //小米推送的AppKey ,APPID ****请务必在数值中间添加一个空格，否则会发生数值变化**** -->
+        <meta-data
+            android:name="XMPUSH_APPKEY"
+            android:value="5851794   217581" />
+        <meta-data
+            android:name="XMPUSH_APPID"
+            android:value="288230376   1517942581" /> <!-- //小米推送的AppKey ,APPID ****请务必在数值中间添加一个空格，否则会发生数值变化**** -->
+        <!-- JPUSH_CHANNEL 是为了方便开发者统计APK分发渠道。 -->
+        <meta-data
+            android:name="JPUSH_CHANNEL"
+            android:value="default" /> <!-- Required. AppKey copied from Portal -->
+        <meta-data
+            android:name="JPUSH_APPKEY"
+            android:value="4bc48df35351d4ccf480561f" />
+
+        <activity android:name=".friendcircle.FriendLocationActivity" />
+        <activity android:name="com.vipcenter.MyFansActivity" />
+        <activity android:name=".rongcloud.activity.contact.ChooseGroupUserActivity" />
+        <activity android:name=".mytag.ChooseTagUserActivity" />
+        <activity android:name=".friendcircle.NewNoticeActivity" />
+        <activity android:name=".friendcircle.MyNoticeActivity" />
+        <activity android:name=".rongcloud.activity.SeePictureActivity" />
+        <activity android:name=".yuedan.SelectCarTypeActivity" />
+        <activity android:name="com.vipcenter.FindPwdActivity" />
+        <activity android:name=".drive.activity.DriverDetailActivity" />
+        <activity android:name=".driverschool.CoachDetailActivity" />
+        <activity android:name=".blacklist.BlackListActivity" />
+        <activity android:name=".drive.activity.CommentMoreActivity" />
+        <activity android:name=".account.AccountManageActivity" />
+        <activity
+            android:name=".washrepair.NewWashrepairDetailActivity"
+            android:theme="@style/DetailTheme" />
+        <activity android:name=".applyenter.AgencyDetailActivity" />
+        <activity android:name=".applyenter.SelectServiceProviderActivity" />
+        <activity android:name=".road.SeeRoadCommentActivity" />
+        <activity android:name=".road.AddRoadCommentActivity" />
+        <activity android:name=".road.MyRoadOrderActivity" />
+        <activity android:name=".road.NewRoadDetailActivity" />
+        <activity android:name=".road.NewRoadhelpActivity" />
+        <activity android:name="com.cheyibao.BrandSelectedActivity" />
+        <activity android:name="com.cheyibao.RentCarByCarModelActivity" />
+        <activity android:name="com.cheyibao.HighCarModelsDetailActivity" />
+        <activity
+            android:name=".friendcircle.NewFriendCircleActivity"
+            android:theme="@style/FriendTheme" />
+        <activity android:name=".myservice.SeeRentCommentActivity" />
+        <activity android:name=".myservice.SeeWashCommentActivity" />
+        <activity android:name=".myservice.AddWashCommentActivity" />
+        <activity android:name=".myservice.SeeSchoolCommentActivity" />
+        <activity android:name="com.cheyibao.RentCarOrderCommentActivity" />
+        <activity android:name="com.cheyibao.HighCarModelsActivity" />
+        <activity android:name="com.cheyibao.HighCarCategoryActivity" />
+        <activity android:name="com.cheyibao.RentCarOrderDetailActivity" />
+        <activity android:name="com.cheyibao.SelfDriverOrderActivity" />
+        <activity
+            android:name=".cheyibao.rentcar.BookCarActivity"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
+        <activity android:name="com.cheyibao.RentCarByShopListActivity" />
+        <activity android:name=".gasstation.GasStationActivity" />
+        <activity android:name=".gasstation.AddStationCommentActivity" />
+        <activity
+            android:name=".gasstation.GasStationDetailActivity"
+            android:theme="@style/DetailTheme" />
+        <activity android:name=".washrepair.NewWashRepairActivity" />
+        <activity android:name=".road.RoadOrderActivity" />
+        <activity
+            android:name=".road.PubRoadActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
+        <activity
+            android:name=".rongcloud.activity.NearbyActivity"
+            android:launchMode="singleTop" />
+        <activity android:name=".fourshop.activity.SeeCommentActivity" />
+        <activity android:name=".fourshop.activity.AddFourCommentActivity" />
+        <activity android:name=".fourshop.activity.CarDetailActivity" />
+        <activity android:name="com.cheyibao.CarModelsSelectedActivity" />
+        <activity android:name="com.cheyibao.CarModelsDetailActivity" />
+        <activity
+            android:name=".fourshop.activity.FourShopDetailActivity"
+            android:theme="@style/DetailTheme" />
+        <activity android:name=".fourshop.activity.NewFourShopActivity" /> <!-- imlib config begin -->
+        <activity android:name="com.cheyibao.LongRentAppliationActivity" /> <!-- imlib config begin -->
+        <activity
+            android:name="io.rong.callkit.MultiVideoCallActivity"
+            android:exported="true"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize">
+            <intent-filter>
+                <action android:name="io.rong.intent.action.voip.MULTIVIDEO" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="io.rong.callkit.SingleCallActivity"
+            android:exported="true"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize">
+            <intent-filter>
+                <action android:name="io.rong.intent.action.voip.SINGLEVIDEO" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="io.rong.intent.action.voip.SINGLEAUDIO" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="io.rong.callkit.MultiAudioCallActivity"
+            android:exported="true"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize">
+            <intent-filter>
+                <action android:name="io.rong.intent.action.voip.MULTIAUDIO" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name="io.rong.callkit.CallSelectMemberActivity" />
+        <activity
+            android:name="com.system.MainActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.tencent.tauth.AuthActivity"
+            android:launchMode="singleTask"
+            android:noHistory="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="tencent101536200" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.tencent.connect.common.AssistActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="behind"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <activity
+            android:name=".wxapi.WXEntryActivity"
+            android:enabled="true"
+            android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:scheme="sdksample" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".wxapi.WXPayEntryActivity"
+            android:exported="true"
+            android:launchMode="singleTop"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" /> <!-- 洗护宝 -->
+        <activity android:name="com.xihubao.WashCarListActivity" />
+        <activity android:name="com.xihubao.WashCarDetailActivity" />
+        <activity android:name="com.xihubao.RepairListActivity" />
+        <activity android:name="com.xihubao.OrderPayActivity" />
+        <activity android:name="com.xihubao.BrandGoodsListActivity" />
+        <activity android:name="com.xihubao.NewGoodsListActivity" />
+        <activity android:name="com.xihubao.RoadAssistanceListActivity" />
+        <activity android:name="com.xihubao.AssistanceDetailActivity" />
+        <activity android:name="com.xihubao.Shop4SInfoActivity" />
+        <activity android:name="com.xihubao.Shop4SListActivity" />
+        <activity android:name="com.xihubao.Shop4SOrderActivity" /> <!-- 车易宝 -->
+        <activity android:name="com.cheyibao.RentShopDetailActivity" />
+        <activity android:name=".driverschool.DrivingSchoolActivity" />
+        <activity android:name=".cheyibao.oldcar.SellCarActivity" />
+        <activity
+            android:name="com.cheyibao.SellCarInfoImproveActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity android:name=".cheyibao.oldcar.OldCarDetailActivity" />
+        <activity android:name="com.cheyibao.OldCarPersonDetailActivity" />
+        <activity android:name="com.cheyibao.OldCarConfigDetailActivity" />
+        <activity android:name="com.cheyibao.SellerDetailActivity" />
+        <activity android:name="com.cheyibao.AskLowPriceActivity" />
+        <activity android:name="com.cheyibao.OldCarSelectActivity" />
+        <activity android:name=".cheyibao.oldcar.OldCarListActivity" />
+        <activity android:name="com.cheyibao.NewCarActivity" />
+        <activity android:name="com.cheyibao.NewCarSellerActivity" />
+        <activity android:name="com.cheyibao.OnSaleCarActivity" />
+        <activity android:name="com.cheyibao.OnSaleCarDetailActivity" />
+        <activity android:name="com.cheyibao.CompanyDetailActivity" />
+        <activity android:name="com.cheyibao.OnSaleCarDetailConfigActivity" />
+        <activity android:name=".cheyibao.newcar.NewCarListActivity" /> <!-- 宝贝百科 -->
+        <activity android:name="com.baike.MagzineListActivity" />
+        <activity android:name="com.baike.MagzineCoverActivity" />
+        <activity android:name="com.baike.MagzineDetailActivity" />
+        <activity android:name="com.baike.DecorationListActivity" />
+        <activity android:name="com.baike.DecorationDetailActivity" />
+        <activity android:name="com.baike.MaintainListActivity" />
+        <activity android:name="com.baike.BuyCarListActivity" />
+        <activity android:name="com.baike.BaikeDetailActivity" /> <!-- 宝贝圈 -->
+        <activity android:name="com.bbcircle.PublishAreaSelectActivity" />
+        <activity android:name=".babycircle.selfdrive.SelfDrivingRepublishActivity" />
+        <activity android:name=".babycircle.selfdrive.DrivingSelfDetailActivity" />
+        <activity android:name="com.bbcircle.CarsShowRepublishActivity" />
+        <activity android:name=".babycircle.carfriend.DriverFriendsRepublishActivity" />
+        <activity android:name="com.bbcircle.DrivingSelfReplaySuccessActivity" />
+        <activity android:name=".babycircle.carfriend.DriverFriendsDetailActivity" />
+        <activity android:name="com.bbcircle.CarShowDetailActivity" />
+        <activity android:name="com.bbcircle.CommentsActivity" />
+        <activity android:name="com.bbcircle.ReplySettingActivity" />
+        <activity android:name="com.bbcircle.ReplyDescriptionActivity" /> <!-- 宝贝商城 -->
+        <activity
+            android:name="com.bbcircle.AllKindActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity android:name=".maket.ShopCartActivity" />
+        <activity android:name=".maket.GoodDetailActivity" />
+        <activity android:name=".maket.MarketSelectListActivity" />
+        <activity android:name=".maket.MarketSelectActivity" /> <!-- 个人中心 -->
+        <activity android:name="com.vipcenter.UserCenterActivity" />
+        <activity
+            android:name="com.vipcenter.MyWalletActivity"
+            android:theme="@style/PayTheme" />
+        <activity android:name="com.vipcenter.ConsumptionListActivity" />
+        <activity android:name="com.vipcenter.ConsumptionDetailActivity" />
+        <activity android:name="com.vipcenter.DepositListActivity" />
+        <activity android:name="com.vipcenter.AccountDepositActivity" />
+        <activity android:name="com.vipcenter.DepositFinishActivity" />
+        <activity android:name="com.vipcenter.LimitExplanationActivity" />
+        <activity android:name="com.vipcenter.FeedbackHelpActivity" />
+        <activity android:name="com.vipcenter.FeedbackSubmitActivity" />
+        <activity android:name="com.vipcenter.MyCustomerServiceActivity" />
+        <activity android:name="com.vipcenter.AboutUsActivity" />
+        <activity android:name="com.vipcenter.MobileCertificationActivity" />
+        <activity
+            android:name="com.vipcenter.IDCardCertificationActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity android:name="com.vipcenter.UserInfoActivity" />
+        <activity android:name="com.vipcenter.AddressListActivity" />
+        <activity android:name="com.vipcenter.AddressAddActivity" />
+        <activity android:name="com.vipcenter.OnSaleCarListActivity" />
+        <activity android:name=".myorder.MyOrderListActivity" />
+        <activity android:name="com.vipcenter.CheckLogisticsActivity" />
+        <activity android:name="com.vipcenter.HaveGotGoodsActivity" />
+        <activity android:name="com.vipcenter.OrderCommentSubmitActivity" />
+        <activity
+            android:name="com.vipcenter.OrderReturnApplyActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity android:name="com.vipcenter.OrderReturnTypeActivity" />
+        <activity android:name="com.vipcenter.OrderComplaintActivity" />
+        <activity
+            android:name=".maket.OrderConfirmActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name="com.vipcenter.RegisterActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity android:name="com.vipcenter.HistoryListActivity" />
+        <activity android:name=".collect.AllCollectionActivity" />
+        <activity android:name="com.vipcenter.MyPublishListActivity" />
+        <activity android:name=".maket.ShopMainListActivity" />
+        <activity android:name="com.vipcenter.OrderDetailActivity" />
+        <activity android:name="com.vipcenter.WashCommentActivity" />
+        <activity android:name="com.vipcenter.WashCommentSubmitActivity" /> <!-- 礼品汇 -->
+        <activity android:name=".gift.GiftMarketHomeActivity" />
+        <activity android:name="com.vipcenter.GiftRuleActivity" />
+        <activity android:name="com.vipcenter.GiftBaobeiCenterActivity" />
+        <activity android:name="com.vipcenter.GiftRecordListActivity" />
+        <activity android:name="com.vipcenter.GiftGoodsListActivity" />
+        <activity android:name="com.vipcenter.GiftSearchListActivity" />
+        <activity android:name="com.vipcenter.GiftAllKindActivity" />
+        <activity android:name="com.vipcenter.GiftGoodDetailActivity" />
+        <activity android:name="com.vipcenter.GiftOrderConfirmActivity" />
+        <activity android:name="com.vipcenter.GiftPaySuccessActivity" />
+        <activity android:name="com.vipcenter.GiftMyOrderListActivity" /> <!-- 入驻申请 -->
+        <!-- <activity android:name="com.vipcenter.EnteringActivity" /> -->
+        <!-- 约单 -->
+        <activity
+            android:name=".yuedan.YuedanHomeActivity"
+            android:windowSoftInputMode="adjustPan|stateHidden" /> <!-- 公用 -->
+        <activity android:name="com.cityselect.CityListActivity" />
+        <activity android:name="com.xihubao.CarBrandSelectActivity" />
+
+        <service android:name="com.amap.api.location.APSService" />
+
+        <meta-data
+            android:name="com.amap.api.v2.apikey"
+            android:value="d81d9607f12197e637c846c33a9bcff3" /> <!-- 设置环信应用的AppKey -->
+        <meta-data
+            android:name="EASEMOB_APPKEY"
+            android:value="Your AppKey" /> <!-- 声明sdk所需的service SDK核心功能 -->
+        <activity android:name="com.vipcenter.LoginByaccountActivity" />
+        <activity android:name="com.vipcenter.BindPhoneActivity" />
+        <activity android:name="com.vipcenter.SetPasswordActivity" />
+
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
+
+        <provider
+            android:name="com.tool.CustomFileProvider"
+            android:authorities="com.yancy.gallerypickdemo.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/filepaths" />
+        </provider>
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="com.example.yunchebao.FileProvider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/rc_file_path" />
+        </provider>
+
+        <receiver
+            android:name=".rongcloud.receiver.DemoNotificationReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="io.rong.push.intent.MESSAGE_ARRIVED" />
+                <action android:name="io.rong.push.intent.MI_MESSAGE_ARRIVED" />
+                <action android:name="io.rong.push.intent.MESSAGE_CLICKED" />
+                <action android:name="io.rong.push.intent.MI_MESSAGE_CLICKED" />
+                <action android:name="io.rong.push.intent.THIRD_PARTY_PUSH_STATE" />
+            </intent-filter>
+        </receiver>
+
+        <activity
+            android:name=".rongcloud.activity.ChatActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data
+                    android:host="com.example.yunchebao"
+                    android:pathPrefix="/conversationlist"
+                    android:scheme="rong" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".rongcloud.activity.AddFriendActivity" />
+        <activity android:name=".rongcloud.activity.AddGroupActivity" />
+        <activity android:name=".rongcloud.activity.SearchAddActivity" />
+        <activity
+            android:name=".rongcloud.activity.SearchResultActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity android:name=".rongcloud.activity.AddGroupDetailActivity" />
+        <activity android:name=".rongcloud.activity.StrangerDelActivity" />
+        <activity android:name=".rongcloud.activity.CreateGroupActivity" />
+        <activity
+            android:name=".rongcloud.activity.contact.MyContactActivity"
+            android:label="@string/title_activity_my_contact"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="stateHidden" />
+        <activity android:name=".rongcloud.activity.stranger.StrangerMsgActivity" />
+        <activity
+            android:name=".rongcloud.activity.contact.ConversationActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data
+                    android:host="com.example.yunchebao"
+                    android:pathPrefix="/conversation/"
+                    android:scheme="rong" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".rongcloud.activity.contact.FriendDetailActivity" />
+        <activity android:name=".rongcloud.activity.contact.ApplyDetailActivity" />
+        <activity android:name=".rongcloud.activity.stranger.SaomaActivity" />
+        <activity android:name="com.tool.CalendarViewActivity" />
+        <activity android:name="com.system.WebviewActivity" />
+        <activity android:name="com.xihubao.MapShopActivity" />
+        <activity android:name="com.vipcenter.RegisteredBindActivity" />
+        <activity android:name="com.vipcenter.UnregisterBindActivity" />
+        <activity android:name=".rongcloud.activity.contact.GroupApplyActivity" />
+        <activity android:name=".rongcloud.activity.contact.GroupDetailActivity" />
+        <activity android:name=".rongcloud.activity.contact.MyGroupDetailActivity" />
+        <activity android:name=".rongcloud.activity.contact.GroupManageActivity" />
+        <activity android:name=".cheyibao.newcar.NewCarDetailActivity" />
+        <activity android:name=".cheyibao.newcar.NewCarShopActivity" />
+        <activity android:name="com.xihubao.WashPayActivity" />
+        <activity android:name="com.bbcircle.RaceDetailActivity" />
+        <activity
+            android:name="com.bbcircle.PublishInputActivity"
+            android:windowSoftInputMode="adjustResize" />
+        <activity android:name="com.cheyibao.CarSecondBrandActivity" />
+        <activity android:name=".driverschool.DrivingOrderActivity" />
+        <activity android:name="com.cheyibao.NewCarItemActivity" />
+        <activity android:name=".maket.GoodsPayActivity" />
+        <activity android:name=".maket.GoodsOrderDetailActivity" />
+        <activity
+            android:name=".maket.SinglePayActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity android:name="com.cheyibao.NewCarParamsActivity" />
+        <activity android:name="com.cheyibao.OldCarCommentActivity" />
+        <activity android:name="com.cheyibao.OldCarShopActivity" />
+        <activity
+            android:name=".cheyibao.rentcar.RentCarOrderActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity android:name="com.cheyibao.CarPayActivity" />
+        <activity android:name="com.cheyibao.CoashSelectActivity" />
+        <activity android:name="com.cheyibao.ClassSelelctActivity" />
+        <activity android:name=".babycircle.selfdrive.NewSelfDrvingActivity" />
+        <activity android:name="com.newversion.NewCarFriendActivity" />
+        <activity
+            android:name="com.newversion.NewContactsActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity android:name=".driverschool.NewDrvingActivity" />
+        <activity android:name=".myservice.ServiceCarActivity" />
+        <activity android:name=".mysale.NewPublishActivity" />
+        <activity android:name="com.vipcenter.MyPhoneActivity" />
+        <activity android:name="com.vipcenter.NewPhoneActivity" />
+        <activity android:name="com.vipcenter.MyFocusActivity" />
+        <activity android:name="com.newversion.FriendCircleActivity" />
+        <activity android:name="com.newversion.FriendsCircleActivity" />
+        <activity android:name="com.newversion.DynamicPublishActivity" />
+        <activity android:name="com.newversion.RecordVideoActivity" />
+        <activity
+            android:name="com.newversion.MyTagsActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".mytag.CreateTagsActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name="com.newversion.ChooseUserActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity android:name="com.vipcenter.PubCommentActivity" />
+        <activity android:name="com.cheyibao.AddSchoolCommentActivity" />
+        <activity android:name="com.cheyibao.AddRentCommentActivity" />
+        <activity android:name="com.vipcenter.EnteringActivity" />
+        <activity
+            android:name="com.system.SplashActivity"
+            android:launchMode="singleTop"
+            android:theme="@style/WelcomeStyle">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="yunchebao.com"
+                    android:scheme="yunchebao" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.vipcenter.MycarActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity android:name="com.vipcenter.MyPayActivity" />
+        <activity android:name="com.vipcenter.SetPayPasswordActivity" />
+        <activity android:name="com.vipcenter.SetPayNextActivity" />
+        <activity android:name="com.system.X5WebviewActivity" />
+        <activity
+            android:name=".yuedan.MyYuedanActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity android:name="com.vipcenter.MyQrcodeActivity" />
+        <activity android:name="com.system.WebCarActivity" />
+        <activity android:name="com.xihubao.ShopInfoActivity" />
+        <activity android:name=".maket.RentestGoodsActivity" />
+        <activity android:name="com.xihubao.RoadActivity" />
+        <activity
+            android:name="com.system.SearchActivity"
+            android:windowSoftInputMode="stateAlwaysVisible" />
+        <activity
+            android:name="com.system.SearchFinishActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity android:name="com.system.NoticeActivity" />
+        <activity android:name="com.baike.BaikeTagActivity" />
+        <activity android:name=".maket.RentGoodsActivity" />
+        <activity android:name="com.cheyibao.SelectCarBrandActivity" />
+        <activity android:name="com.vipcenter.GiftMoreActivity" />
+        <activity android:name="com.vipcenter.RebackMoneyActivity" />
+        <activity android:name="com.vipcenter.RentOrderDetailActivity" />
+        <activity android:name="com.vipcenter.ShoolOrderDetailActivity" />
+        <activity android:name="com.vipcenter.WashOrderDetailActivity" />
+        <activity android:name="com.vipcenter.OrderCommentsActivity" />
+        <activity android:name="com.vipcenter.ManaAddressActivity" />
+        <activity android:name="com.vipcenter.MyCarListActivity" />
+        <activity android:name=".rongcloud.activity.GroupQrcodeActivity" />
+        <activity android:name=".drive.activity.DriveServiceActivity" />
+        <activity android:name="com.cheyibao.ShopListActivity" />
+        <activity android:name="com.cheyibao.CarModelsListActivity" />
+        <activity android:name=".cheyibao.rentcar.ShopListNoAreaActivity" />
+        <activity android:name=".cheyibao.rentcar.ShopDetailActivity" />
+        <activity android:name=".drive.activity.ReplaceDriveDetailActivity" />
+        <activity android:name=".drive.activity.AddSubstitubeActivity" />
+        <activity android:name="com.newversion.DynamicLookPermissionActivity" />
+        <activity android:name=".drive.activity.ReplaceOrderActivity" />
+        <activity android:name=".drive.activity.PayDetailActivity" />
+        <activity android:name=".drive.activity.AddOrderCommentActivity" />
+        <activity android:name=".drive.activity.DriverCommentActivity" />
+        <activity android:name=".drive.activity.DriverMoreActivity" />
+        <activity android:name=".drive.activity.DriveOrderDetailActivity" />
+        <activity
+            android:name=".drive.activity.SimplePlayerActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/VideoTheme" /> <!-- 适配华为（huawei）刘海屏 -->
+        <meta-data
+            android:name="android.notch_support"
+            android:value="true" /> <!-- 适配小米（xiaomi）刘海屏 -->
+        <meta-data
+            android:name="notch.config"
+            android:value="portrait|landscape" />
+        <meta-data
+            android:name="android.max_aspect"
+            android:value="2.4" />
+    </application>
+
+</manifest>

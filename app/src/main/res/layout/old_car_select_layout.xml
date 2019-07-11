@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <include layout="@layout/top_title_layout"></include>
+
+    <ScrollView
+        android:layout_above="@id/submit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:background="@color/white"
+       >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="70dp"
+            android:orientation="vertical"
+            android:paddingBottom="70dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="15dp"
+                android:text="车型"
+                android:textColor="@color/black_33"
+                android:textSize="14sp" />
+            <com.tool.view.GridViewForScrollView
+                android:layout_margin="10dp"
+                android:verticalSpacing="5dp"
+                android:horizontalSpacing="5dp"
+                android:numColumns="3"
+                android:id="@+id/sg_type"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </com.tool.view.GridViewForScrollView>
+            <LinearLayout
+                android:visibility="gone"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="15dp"
+                    android:text="车辆来源"
+                    android:textColor="@color/black_33"
+                    android:textSize="14sp" />
+
+                <com.tool.view.GridViewForScrollView
+                    android:layout_margin="10dp"
+                    android:verticalSpacing="5dp"
+                    android:horizontalSpacing="5dp"
+                    android:numColumns="3"
+                    android:id="@+id/sg_from"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"></com.tool.view.GridViewForScrollView>
+            </LinearLayout>
+
+
+
+
+
+            <LinearLayout
+                android:visibility="gone"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:orientation="horizontal"
+                    android:padding="15dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="行驶里程"
+                        android:textColor="@color/black_33"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="单位：万公里"
+                        android:textColor="@color/gray_99"
+                        android:textSize="10sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="right"
+                        android:text="不限里程"
+                        android:textColor="@color/black_33"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+                <com.warkiz.widget.IndicatorSeekBar
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:isb_indicator_color="#f3ca65"
+                    app:isb_indicator_type="rectangle_rounded_corner"
+                    app:isb_progress="100"
+                    app:isb_seek_bar_type="discrete_ticks_texts"
+                    app:isb_text_array="@array/indecator_array_licheng"
+                    app:isb_text_color="#999999"
+                    app:isb_text_size="14sp"
+                    app:isb_thumb_color="#f3ca65"
+                    app:isb_thumb_drawable="@mipmap/slippageicon"
+                    app:isb_tick_color="#f3ca65"
+                    app:isb_tick_num="6"
+                    app:isb_tick_size="1dp"
+                    app:isb_tick_type="oval"
+                    app:isb_track_background_bar_color="#999999"
+                    app:isb_track_progress_bar_color="#f3ca65" />
+            </LinearLayout>
+
+
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="15dp"
+                android:text="排放标准"
+                android:textColor="@color/black_33"
+                android:textSize="14sp" />
+
+            <com.tool.view.GridViewForScrollView
+                android:layout_margin="10dp"
+                android:verticalSpacing="5dp"
+                android:horizontalSpacing="5dp"
+                android:numColumns="3"
+                android:id="@+id/sg_paifang"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </com.tool.view.GridViewForScrollView>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="15dp"
+                android:text="燃油类型"
+                android:textColor="@color/black_33"
+                android:textSize="14sp" />
+
+            <com.tool.view.GridViewForScrollView
+                android:layout_margin="10dp"
+                android:verticalSpacing="5dp"
+                android:horizontalSpacing="5dp"
+                android:numColumns="3"
+                android:id="@+id/sg_ranyou"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </com.tool.view.GridViewForScrollView>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="15dp"
+                android:text="车身颜色"
+                android:textColor="@color/black_33"
+                android:textSize="14sp" />
+            <com.tool.view.GridViewForScrollView
+                android:layout_margin="10dp"
+                android:verticalSpacing="5dp"
+                android:horizontalSpacing="5dp"
+                android:numColumns="3"
+                android:id="@+id/sg_color"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </com.tool.view.GridViewForScrollView>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="15dp"
+                android:text="变数箱"
+                android:textColor="@color/black_33"
+                android:textSize="14sp" />
+
+            <com.tool.view.GridViewForScrollView
+                android:layout_margin="10dp"
+                android:verticalSpacing="5dp"
+                android:horizontalSpacing="5dp"
+                android:numColumns="3"
+                android:id="@+id/sg_variableBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </com.tool.view.GridViewForScrollView>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="15dp"
+                android:text="座位数"
+                android:textColor="@color/black_33"
+                android:textSize="14sp" />
+
+            <com.tool.view.GridViewForScrollView
+                android:layout_margin="10dp"
+                android:verticalSpacing="5dp"
+                android:horizontalSpacing="5dp"
+                android:numColumns="3"
+                android:id="@+id/sg_seat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </com.tool.view.GridViewForScrollView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="15dp"
+                android:text="国别"
+                android:textColor="@color/black_33"
+                android:textSize="14sp" />
+
+            <com.tool.view.GridViewForScrollView
+                android:layout_margin="10dp"
+                android:verticalSpacing="5dp"
+                android:horizontalSpacing="5dp"
+                android:numColumns="3"
+                android:id="@+id/sg_country"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </com.tool.view.GridViewForScrollView>
+
+
+        </LinearLayout>
+    </ScrollView>
+
+    <TextView
+        android:layout_alignParentBottom="true"
+        android:id="@+id/submit"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_weight="1"
+        android:background="@color/yellow_65"
+        android:gravity="center"
+        android:text="查看"
+        android:textColor="@color/white"
+        android:textSize="18sp" />
+</RelativeLayout>

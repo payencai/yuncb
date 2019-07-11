@@ -1,0 +1,137 @@
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
+    <string name="app_name">云车宝</string>
+
+
+    <string name="dialog_default_title">Here\'s a message!</string>
+    <string name="dialog_ok">OK</string>
+    <string name="dialog_cancel">Cancel</string>
+
+    <string name="hint_login_password">输入密码</string>
+    <string name="login">登录</string>
+    <string name="login_forget_pwd">忘记密码</string>
+
+    <string name="locating">定位中</string>
+    <string name="search">搜索</string>
+    <string name="notfound">抱歉，未找到！</string>
+    <string name="key_word">请输入关键字</string>
+    <string name="locatez_as">定位为</string>
+    <string name="switch_ornot">，是否切换？</string>
+    <string name="city_show_text_hot">热门城市</string>
+    <string name="city_hotcity_curlocationcity_text">当前定位城市</string>
+    <string name="third_title_close">关闭</string>
+    <string name="city_hotcity_searchedittext_hint">请输入城市名,首字母或拼音</string>
+    <string name="xml_loading_01">加载中</string>
+
+    <string name="confirm1">确定</string>
+    <string name="cancel">取消</string>
+    <string name="quit_dialog_cancel">取 消</string>
+    <string name="assistant_upload_dialog_title">提示</string>
+    <string name="title_activity_my_contact">MyContactActivity</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="self_driving">自驾</string>
+    <string name="long_rent">长租</string>
+    <string name="get">取</string>
+    <string name="take_car_address">取车地点</string>
+    <string name="car_to_home">送车取车</string>
+    <string name="return_car_address">还车地点</string>
+    <string name="door_to_take_car">上门取车</string>
+    <string name="pick_the_car_immediately">立即选车</string>
+    <string name="self_driver_order">自驾订单</string>
+    <string name="long_rent_application">长租申请</string>
+    <string name="recommended_vehicle_type">推荐车型</string>
+    <string name="high_end_self_driving">高端自驾</string>
+    <string name="store_query">门店查询</string>
+    <string name="car_type_query">车型查询</string>
+    <string name="please_select_take_car_address">请选择取车地址</string>
+    <string name="please_select_return_car_address">请选择还车地址</string>
+    <string name="brand">品牌</string>
+    <string name="price">价格</string>
+    <string name="rent_shop_detail">门店详情</string>
+    <string name="dial_the_phone">拨打号码</string>
+    <string name="online_chat">在线聊天</string>
+    <string name="payment">付款</string>
+    <string name="online_pay">在线支付</string>
+    <string name="fuel_fee_self_payment">燃油费自理</string>
+    <string name="order_confirm">订单确认</string>
+    <string name="total_price">总价格</string>
+    <string name="name">姓名</string>
+    <string name="please_enter_name">请输入姓名</string>
+    <string name="phone">电话</string>
+    <string name="please_enter_phone">请输入电话</string>
+    <string name="identicaty">身份证号码</string>
+    <string name="the_same_the_name">请输入正确的身份证号码</string>
+    <string name="phone_number">电话号码</string>
+    <string name="emergency_contact_person">紧急联系人</string>
+    <string name="please_enter_emergency_contact_person_name">请输入紧急联系人姓名</string>
+    <string name="contact_person_phone">联系人手机</string>
+    <string name="please_enter_contact_person_phone_number">请输入联系人手机号</string>
+    <string name="rent_car_warm">租车提醒</string>
+    <string name="rent_car_notice">租车须知</string>
+    <string name="take_car_voucher">取车凭证：需携带本人二代身份证+本人驾驶证</string>
+    <string name="foregift_advance_sale">押金预售金</string>
+    <string name="foregift_advance_sale_content">取车时需要收取押金30天，30天后无交通违规记录，返还押金（具体收取方案请与商家沟通）</string>
+    <string name="cancel_ruler">取消规则</string>
+    <string name="cancel_ruler_content">下单之后了在4小时内免费取消，4小时后取消需收取百分之三十的费用，超过取车时间未取车不可退款</string>
+    <string name="mileage_and_oil_fee"><![CDATA[里程&油费]]></string>
+    <string name="mileage_and_oil_fee_content">不限制车辆里程，油费需自理</string>
+    <string name="submit_order">提交订单</string>
+    <string name="per_day_price">日均</string>
+
+
+    <string name="empty_view_hint">暂无数据</string>
+    <string name="error_view_hint">加载失败</string>
+    <string name="no_network_view_hint">网络异常</string>
+    <string name="select_car_model">选择车型</string>
+    <string name="please_select_car_models">请选择车型</string>
+    <string name="select_shop_count">选择上家数量</string>
+    <string name="please_shop_count">选择报价商家数量</string>
+    <string name="contact_info">联系信息</string>
+    <string name="contact_person_1">联系人*</string>
+    <string name="please_enter_contact_person_name">请输入联系人姓名</string>
+    <string name="contact_phone_1">联系电话*</string>
+    <string name="please_enter_contact_phone">请输入联系电话</string>
+    <string name="identify_card_1">身份证*</string>
+    <string name="please_enter_identify_card">请输入身份证号</string>
+    <string name="remark_1">备注*</string>
+    <string name="please_enter_remarks_info">请输入备注信息</string>
+    <string name="application_">申请</string>
+    <string name="emergency_contact_person_1">紧急联系人*</string>
+    <string name="emergency_contact_phone">紧急联系手机*</string>
+    <string name="please_enter_emergency_contact_phone">请输入紧急联系手机号</string>
+    <string name="car">车辆</string>
+    <string name="distance">距离</string>
+    <string name="to_home_take_and_send">上门取送</string>
+    <string name="price_ranger">价格区间</string>
+    <string name="min_price">最低价</string>
+    <string name="max_price">最高价</string>
+    <string name="max_distance">最大距离</string>
+    <string name="_1km">1KM以内</string>
+    <string name="_2km">2KM以内</string>
+    <string name="_3km">3KM以内</string>
+    <string name="_5km">5KM以内</string>
+    <string name="_7km">7KM以内</string>
+    <string name="_10km">10KM以内</string>
+    <string name="km_">km以内</string>
+    <string name="booking">预定</string>
+    <string name="shop_name">商家名称</string>
+    <string name="shop_phone">商家电话</string>
+    <string name="shop_address">商家地址</string>
+    <string name="cancel_order">取消订单</string>
+    <string name="comment">评价</string>
+    <string name="shop_complaint">商家投诉</string>
+    <string name="title_activity_add_road_comment">Sign in</string>
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password (optional)</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+</resources>

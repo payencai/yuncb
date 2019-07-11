@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".rongcloud.activity.contact.ConversationActivity">
+    <RelativeLayout
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+        <ImageView
+            android:id="@+id/back"
+            android:padding="15dp"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/back"
+            android:layout_width="50dp"
+            android:layout_height="50dp" />
+        <TextView
+            android:id="@+id/title"
+            android:layout_centerInParent="true"
+            android:textSize="18sp"
+            android:textColor="@color/black_33"
+            android:text="哈哈哈"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:id="@+id/iv_head"
+            android:src="@mipmap/user"
+            android:padding="15dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_width="50dp"
+            android:layout_height="50dp" />
+    </RelativeLayout>
+    <View
+        android:background="#e2e2e2"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"></View>
+    <RelativeLayout
+        android:visibility="gone"
+        android:id="@+id/rl_comment"
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+        <TextView
+            android:textColor="@color/gray_66"
+            android:textSize="12sp"
+            android:layout_marginLeft="10dp"
+            android:layout_centerVertical="true"
+            android:text="你对店铺还满意嘛？来评分评论吧！"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/tv_comment"
+            android:layout_marginRight="10dp"
+            android:textSize="12sp"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:text="评论"
+            android:background="@color/yellow_02"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_width="60dp"
+            android:layout_height="28dp" />
+    </RelativeLayout>
+    <fragment
+        android:id="@+id/conversation"
+        android:name="io.rong.imkit.fragment.ConversationFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</LinearLayout>

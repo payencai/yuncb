@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="horizontal"
+    android:padding="10dp">
+
+    <ImageView
+        android:id="@+id/iv_logo"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:scaleType="fitXY"
+        android:src="@mipmap/ex_img" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_toLeftOf="@id/rl_right"
+        android:layout_toRightOf="@id/img"
+        android:orientation="vertical"
+        android:paddingLeft="10dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:layout_toLeftOf="@id/tv_price"
+                android:text="昆山汽车修理厂"
+                android:textColor="@color/black_33"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/tv_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:text="￥12"
+                android:textColor="@color/yellow_65"
+                android:textSize="12sp" />
+        </RelativeLayout>
+
+        <com.willy.ratingbar.ScaleRatingBar
+
+            android:id="@+id/sb_score"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srb_clearRatingEnabled="true"
+            app:srb_minimumStars="0"
+            app:srb_isIndicator="true"
+            app:srb_numStars="5"
+            app:srb_rating="0"
+            app:srb_scrollable="true"
+            app:srb_starHeight="12dp"
+            app:srb_starPadding="2dp"
+            app:srb_starWidth="12dp"
+            app:srb_stepSize="0.5">
+
+        </com.willy.ratingbar.ScaleRatingBar>
+
+        <TextView
+            android:id="@+id/tv_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="评价5.00 | 订单3"
+            android:textSize="10sp" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+
+                android:id="@+id/tv_addr"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="20dp"
+                android:layout_toLeftOf="@id/tv_dis"
+                android:singleLine="true"
+                android:text="昆明市官渡区六甲街道办事处"
+                android:textSize="10sp" />
+
+            <TextView
+                android:id="@+id/tv_dis"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:layout_centerVertical="true"
+                android:text="3.06km"
+                android:textSize="10sp" />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+
+</LinearLayout>

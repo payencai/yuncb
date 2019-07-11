@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".cheyibao.newcar.NewCarShopActivity">
+
+    <RelativeLayout
+        android:id="@+id/rl_top"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/white">
+
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_centerVertical="true"
+            android:padding="15dp"
+            android:src="@mipmap/back" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="店铺"
+            android:textColor="@color/black_33"
+            android:textSize="18sp" />
+
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_marginTop="0.5dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:background="@color/white"
+            android:paddingTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="10dp"
+            android:paddingLeft="15dp">
+             <LinearLayout
+                 android:gravity="center_vertical"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content">
+                 <TextView
+                     android:id="@+id/tv_shopname"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:text="云南隆创尚通" />
+                 <TextView
+                     android:id="@+id/tv_grade"
+                     android:gravity="center"
+                     android:background="@mipmap/grades"
+                     android:textColorHint="@color/white"
+                     android:layout_width="15dp"
+                     android:layout_height="17dp"
+                     android:layout_marginLeft="10dp"
+                     android:text="1"
+                     android:textColor="@color/white"
+                     android:textSize="10sp" />
+             </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="10dp"
+                    android:layout_height="12dp"
+                    android:src="@mipmap/location_gray_icon" />
+
+                <TextView
+                    android:id="@+id/tv_address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="昆明市滇池路542号（滇池路与日新路交叉口）"
+                    android:textColor="@color/gray_99"
+                    android:textSize="10sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <com.flyco.tablayout.SlidingTabLayout
+            android:id="@+id/tab_shop"
+            android:layout_marginTop="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@android:color/white"
+            app:tl_indicator_color="@color/yellow_02"
+            app:tl_indicator_corner_radius="30dp"
+            app:tl_indicator_height="3dp"
+            app:tl_indicator_width="30dp"
+            app:tl_indicator_width_equal_title="false"
+            app:tl_tab_space_equal="true"
+            app:tl_textSelectColor="@color/yellow_02"
+            app:tl_textUnselectColor="@android:color/black"
+            app:tl_textsize="14sp" />
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/vp_gank"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#fff2f4f5">
+
+        </android.support.v4.view.ViewPager>
+    </LinearLayout>
+
+
+</LinearLayout>

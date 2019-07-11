@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.tool.listview.PersonalScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:id="@+id/sc_new"
+    android:layout_height="match_parent"
+    android:background="@color/gray_ee">
+
+    <LinearLayout
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@color/white"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <RelativeLayout
+                android:id="@+id/search_lay"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_weight="7"
+                android:background="@drawable/gray_circle_background"
+                android:padding="6dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:drawableLeft="@mipmap/search__small_icon"
+                    android:drawablePadding="10dp"
+                    android:text="搜索您想要的"
+                    android:textColor="@color/gray_99"
+                    android:textSize="12sp" />
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:gravity="center"
+                android:text="昆明"
+                android:textColor="@color/yellow_77"
+                android:textSize="16sp" />
+        </LinearLayout>
+        <!--广告栏banner-->
+        <com.youth.banner.Banner
+            android:id="@+id/banner"
+            android:layout_width="fill_parent"
+            android:layout_height="210dp"
+            android:background="@color/white"
+            android:visibility="visible" />
+        <!--广告栏banner  end-->
+
+
+
+        <HorizontalScrollView
+            android:id="@+id/scrollView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="none"
+            >
+            <LinearLayout
+                android:id="@+id/linearLayout1"
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+                <com.tool.view.GridViewForScrollView
+                    android:id="@+id/gv_newcar"
+                    android:stretchMode="columnWidth"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                </com.tool.view.GridViewForScrollView>
+
+            </LinearLayout>
+        </HorizontalScrollView>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="horizontal"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="8dp">
+
+            <com.coorchice.library.SuperTextView
+                android:id="@+id/selectMenu1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="6dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:padding="7dp"
+                android:text="10万以下"
+                android:textColor="@color/black_33"
+                android:textSize="12sp"
+                app:corner="6dp"
+                app:solid="@color/white"
+                app:stroke_color="@color/gray_ee"
+                app:stroke_width="1dp"></com.coorchice.library.SuperTextView>
+
+            <com.coorchice.library.SuperTextView
+                android:id="@+id/selectMenu2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="6dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:padding="7dp"
+                android:text="10-25万"
+                android:textColor="@color/black_33"
+                android:textSize="12sp"
+                app:corner="6dp"
+                app:solid="@color/white"
+                app:stroke_color="@color/gray_ee"
+                app:stroke_width="1dp"></com.coorchice.library.SuperTextView>
+
+            <com.coorchice.library.SuperTextView
+                android:id="@+id/selectMenu3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="6dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:padding="7dp"
+                android:text="25-40万"
+                android:textColor="@color/black_33"
+                android:textSize="12sp"
+                app:corner="6dp"
+                app:solid="@color/white"
+                app:stroke_color="@color/gray_ee"
+                app:stroke_width="1dp"></com.coorchice.library.SuperTextView>
+
+            <com.coorchice.library.SuperTextView
+                android:id="@+id/selectMenu4"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="6dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:padding="7dp"
+                android:text="40-55万"
+                android:textColor="@color/black_33"
+                android:textSize="12sp"
+                app:corner="6dp"
+                app:solid="@color/white"
+                app:stroke_color="@color/gray_ee"
+                app:stroke_width="1dp"></com.coorchice.library.SuperTextView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="horizontal"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="8dp">
+
+            <com.coorchice.library.SuperTextView
+                android:id="@+id/tv_p55"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="6dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:padding="7dp"
+                android:text="55-70万"
+                android:textColor="@color/black_33"
+                android:textSize="12sp"
+                app:corner="6dp"
+                app:solid="@color/white"
+                app:stroke_color="@color/gray_ee"
+                app:stroke_width="1dp"></com.coorchice.library.SuperTextView>
+
+            <com.coorchice.library.SuperTextView
+                android:id="@+id/tv_p70"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="6dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:padding="7dp"
+                android:text="70-85万"
+                android:textColor="@color/black_33"
+                android:textSize="12sp"
+                app:corner="6dp"
+                app:solid="@color/white"
+                app:stroke_color="@color/gray_ee"
+                app:stroke_width="1dp"></com.coorchice.library.SuperTextView>
+
+            <com.coorchice.library.SuperTextView
+                android:id="@+id/tv_p85"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="6dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:padding="7dp"
+                android:text="85-100万"
+                android:textColor="@color/black_33"
+                android:textSize="12sp"
+                app:corner="6dp"
+                app:solid="@color/white"
+                app:stroke_color="@color/gray_ee"
+                app:stroke_width="1dp"></com.coorchice.library.SuperTextView>
+
+            <com.coorchice.library.SuperTextView
+                android:id="@+id/tv_p100"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="6dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:padding="7dp"
+                android:text="100万以上"
+                android:textColor="@color/black_33"
+                android:textSize="12sp"
+                app:corner="6dp"
+                app:solid="@color/white"
+                app:stroke_color="@color/gray_ee"
+                app:stroke_width="1dp"></com.coorchice.library.SuperTextView>
+        </LinearLayout>
+        <com.coorchice.library.SuperTextView
+            android:id="@+id/toAllCars"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="查看全部车型"
+            android:textColor="@color/white_fe"
+            android:textSize="14sp"
+            app:corner="2dp"
+            app:solid="@color/yellow_65"></com.coorchice.library.SuperTextView>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:background="@color/white"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp"
+                android:drawableLeft="@mipmap/title_line_orange"
+                android:drawablePadding="10dp"
+                android:text="新品推荐"
+                android:textColor="@color/black_33" />
+
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:src="@mipmap/gengduo_icon"
+                android:visibility="gone" />
+        </RelativeLayout>
+        <com.tool.listview.PersonalListView
+            android:id="@+id/listview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            android:focusable="false"
+            android:background="@color/white">
+
+        </com.tool.listview.PersonalListView>
+
+
+
+    </LinearLayout>
+
+</com.tool.listview.PersonalScrollView>

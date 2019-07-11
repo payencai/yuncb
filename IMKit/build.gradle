@@ -1,0 +1,49 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 26
+
+    defaultConfig {
+        minSdkVersion 16
+        targetSdkVersion 23
+        versionCode 2019060617
+        versionName "2.9.18 Stable"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    sourceSets {
+        main {
+            manifest.srcFile 'src/main/AndroidManifest.xml'
+            java.srcDirs = ['src/main/java']
+            resources.srcDirs = ['src/main/java']
+            renderscript.srcDirs = ['src/main/java']
+            res.srcDirs = ['src/main/res']
+            assets.srcDirs = ['src/main/assets']
+            jni.srcDirs = []
+            jniLibs.srcDirs = ['src/main/libs']
+        }
+    }
+}
+
+dependencies {
+    api fileTree(include: ['*.jar'], dir: 'src/main/libs')
+    api 'com.android.support:support-v4:26.0.0'
+    api 'com.googlecode.mp4parser:isoparser:1.1.21'
+    api 'com.android.support:exifinterface:26.0.0'
+    api project(':IMLib')
+    implementation files('src/main/libs/Amap_2DMap_V5.2.0_20170627.jar')
+    implementation files('src/main/libs/AMap_Channel_Location_V1.4.0_20160708.jar')
+    implementation files('src/main/libs/AMap_Search_V6.5.0_20180930.jar')
+}
+
+repositories {
+    maven {
+        url 'https://maven.google.com/'
+        name 'Google'
+    }
+}

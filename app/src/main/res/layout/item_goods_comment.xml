@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <ImageView
+            android:id="@+id/iv_logo"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:scaleType="fitXY"
+            android:src="@mipmap/image_bbcircle" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="描述相符"
+            android:textColor="@color/black_33"
+            android:textSize="14sp" />
+
+        <com.iarcuschin.simpleratingbar.SimpleRatingBar
+            android:id="@+id/sb_score"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            app:srb_starSize="14dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="18dp"
+            android:text="非常好"
+            android:textColor="@color/gray_99"
+            android:textSize="14sp"
+            android:visibility="gone" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/two_line_bg"
+        android:orientation="vertical"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+
+        <EditText
+            android:id="@+id/et_comment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:gravity="left|top"
+            android:hint="宝贝满足您的期待吗？说说它的优点和美中不足的地方吧"
+            android:lineSpacingExtra="4dp"
+            android:minHeight="60dp"
+            android:padding="10dp"
+            android:textSize="14sp" />
+
+        <com.comment.EvaluationChoiceImageView
+            android:id="@+id/addimgs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </com.comment.EvaluationChoiceImageView>
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray_ee"></View>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <ImageView
+                android:id="@+id/iv_show"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@mipmap/unselect" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="匿名"
+                android:textColor="@color/black_33"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:text="你写的评论以匿名的形式展现"
+                android:textColor="@color/gray_99"
+                android:textSize="10sp" />
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>
