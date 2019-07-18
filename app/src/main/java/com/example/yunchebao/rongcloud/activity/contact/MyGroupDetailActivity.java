@@ -634,7 +634,7 @@ public class MyGroupDetailActivity extends AppCompatActivity {
                 RongIM.getInstance().clearMessages(Conversation.ConversationType.GROUP,groupId , new RongIMClient.ResultCallback<Boolean>() {
                     @Override
                     public void onSuccess(Boolean aBoolean) {
-                        ToastUtil.showToast(MyGroupDetailActivity.this,aBoolean+"清除成功");
+                        ToastUtil.showToast(MyGroupDetailActivity.this,"清除成功");
                     }
 
                     @Override

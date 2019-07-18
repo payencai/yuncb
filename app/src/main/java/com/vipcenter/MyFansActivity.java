@@ -11,9 +11,12 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.costans.PlatformContans;
 import com.example.yunchebao.MyApplication;
 import com.example.yunchebao.R;
+import com.example.yunchebao.fans.FansAdapter;
 import com.google.gson.Gson;
 import com.http.HttpProxy;
 import com.http.ICallBack;
+import com.lljjcoder.style.citylist.Toast.ToastUtils;
+import com.payencai.library.util.ToastUtil;
 import com.tool.ActivityConstans;
 import com.tool.UIControlUtils;
 import com.vipcenter.adapter.FocusAdapter;
@@ -36,7 +39,7 @@ import io.rong.imkit.RongIM;
 public class MyFansActivity extends AppCompatActivity {
 
     List<MyFocus> mMyFocusList;
-    FocusAdapter mFocusAdapter;
+    FansAdapter mFocusAdapter;
     @BindView(R.id.rv_focus)
     RecyclerView rv_focus;
     int page=1;
@@ -59,7 +62,7 @@ public class MyFansActivity extends AppCompatActivity {
     }
     private void initView() {
         mMyFocusList=new ArrayList<>();
-        mFocusAdapter=new FocusAdapter(R.layout.item_focus,mMyFocusList);
+        mFocusAdapter=new FansAdapter(R.layout.item_focus,mMyFocusList);
         mFocusAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
             @Override
             public void onLoadMoreRequested() {
@@ -71,15 +74,86 @@ public class MyFansActivity extends AppCompatActivity {
         mFocusAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
             @Override
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
-                MyFocus myFocus= (MyFocus) adapter.getItem(position);
-                if(view.getId()==R.id.tv_chat){
+                MyFocus myFocus = (MyFocus) adapter.getItem(position);
+                if (view.getId() == R.id.tv_chat) {
                     RongIM.getInstance().startPrivateChat(MyFansActivity.this, myFocus.getUserId(), myFocus.getName());
+                } else if (view.getId() == R.id.tv_focus) {
+                    delfocus(myFocus.getUserId());
+
                 }
             }
         });
         rv_focus.setLayoutManager(new LinearLayoutManager(this));
         rv_focus.setAdapter(mFocusAdapter);
         getData();
+    }
+    private void focus(String userId) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("otherId", userId);
+        params.put("type", "1");
+        HttpProxy.obtain().post(PlatformContans.User.addUserFocus, MyApplication.token, params, new ICallBack() {
+            @Override
+            public void OnSuccess(String result) {
+                Log.e("focus", result);
+                JSONObject jsonObject = null;
+                try {
+                    jsonObject = new JSONObject(result);
+                    int code = jsonObject.getInt("resultCode");
+                    if (code == 0) {
+                        ToastUtil.showToast(MyFansActivity.this, "关注成功");
+                        refresh();
+                    } else {
+                        String msg = jsonObject.getString("message");
+                        ToastUtils.showLongToast(MyFansActivity.this, msg);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+            }
+
+            @Override
+            public void onFailure(String error) {
+
+            }
+        });
+    }
+
+    private void refresh() {
+        page = 1;
+        mMyFocusList.clear();
+        getData();
+    }
+
+    private void delfocus(String userId) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("otherId", userId);
+        HttpProxy.obtain().post(PlatformContans.User.deleteUserFocus, MyApplication.token, params, new ICallBack() {
+            @Override
+            public void OnSuccess(String result) {
+                Log.e("focus", result);
+                JSONObject jsonObject = null;
+                try {
+                    jsonObject = new JSONObject(result);
+                    int code = jsonObject.getInt("resultCode");
+                    if (code == 0) {
+                        ToastUtil.showToast(MyFansActivity.this, "取消成功");
+                        refresh();
+                    } else {
+                        String msg = jsonObject.getString("message");
+                        ToastUtils.showLongToast(MyFansActivity.this, msg);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(String error) {
+
+            }
+        });
     }
     private void getData(){
         Map<String,Object> params=new HashMap<>();

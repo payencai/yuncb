@@ -64,17 +64,29 @@ public class CarRecommendListAdapter extends BaseAdapter {
         } else {
             vh = (ViewHolder) convertView.getTag();
         }
-        if(!TextUtils.isEmpty(oldCar.getCarCategoryDetail().getBanner1())){
-             vh.img.setImageURI(Uri.parse(oldCar.getCarCategoryDetail().getBanner1()));
+        String img=oldCar.getCarImage();
+        if(!TextUtils.isEmpty(img)){
+            if(img.contains(",")){
+                String imagesList[]=img.split(",");
+                vh.img.setImageURI(Uri.parse(imagesList[0]));
+            }else{
+                vh.img.setImageURI(Uri.parse(img));
+            }
         }
+//        if(!TextUtils.isEmpty(oldCar.getCarCategoryDetail().getBanner1())){
+//             vh.img.setImageURI(Uri.parse(oldCar.getv().getBanner1()));
+//        }
         vh.name.setText(oldCar.getFirstName());
-        vh.tv_name2.setText(oldCar.getSecondName()+oldCar.getFirstName());
+        vh.tv_name2.setText(oldCar.getSecondName()+oldCar.getThirdName());
 
 //        if (position == 1) {
 //
 //            vh.item2.setText("2016年/1.0万公里  淄博  个人");
 //        }
-        String value=oldCar.getRegistrationTime().substring(0,4)+"/"+oldCar.getDistance()+"  "+oldCar.getRegistrationAddress();
+        if(oldCar.getDistance()!=null&&oldCar.getDistance().contains("km")){
+
+        }
+        String value=oldCar.getRegistrationTime().substring(0,4)+"年/"+oldCar.getDistance().replace("km","")+"公里  "+oldCar.getRegistrationAddress();
         if(oldCar.getType()==1){
             value=value+"  商家";
         }else{
@@ -83,16 +95,17 @@ public class CarRecommendListAdapter extends BaseAdapter {
         vh.item2.setText(value);
         String oldprice= MathUtil.getDoubleTwo(oldCar.getOldPrice());
         String newprice= MathUtil.getDoubleTwo(oldCar.getNewPrice());
-        if(oldCar.getOldPrice()>10000){
+        if(oldCar.getOldPrice()>=10000){
             oldprice= MathUtil.getDoubleTwo(oldCar.getOldPrice()/10000)+"万";
         }
-        if(oldCar.getNewPrice()>10000){
+        if(oldCar.getNewPrice()>=10000){
             newprice= MathUtil.getDoubleTwo(oldCar.getNewPrice()/10000)+"万";
         }
 
         vh.tv_price.setText("低至￥"+oldprice);
         vh.tv_newprice.setText("新车含税￥"+newprice);
         vh.tv_newprice.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
+        vh.tv_newprice.setVisibility(View.GONE);
         return convertView;
     }
 

@@ -525,7 +525,7 @@ public class SellCarInfoImproveActivity extends NoHttpFragmentBaseActivity imple
         params.put("firstId", id1);
         params.put("thirdId", id3);
         params.put("carDescribe", et_des.getEditableText().toString());
-        params.put("oldPrice", Double.parseDouble(b_price));
+        params.put("oldPrice", Double.parseDouble(b_price)*10000);
         params.put("registrationAddress", b_city);
         params.put("color", color);
         params.put("code", et_code.getEditableText().toString());
@@ -535,8 +535,8 @@ public class SellCarInfoImproveActivity extends NoHttpFragmentBaseActivity imple
         params.put("linkman", et_name.getEditableText().toString());
         params.put("linkmanTelephone", et_phone.getEditableText().toString());
         params.put("insuranceValidTime", time2Text.getText().toString());//有效期年月日
-        params.put("lastValidateCar", "2019-04-10 00:00:00");
-        params.put("registrationTime", b_time + "-10 00:00:00");
+        params.put("lastValidateCar", time1Text.getText().toString()+"-01 00:00:00");
+        params.put("registrationTime", b_time + "-01 00:00:00");
         params.put("linkmanBuyCarInvoice", image3);
         params.put("linkmanDrivingLicense", image2);
         params.put("linkmanRegistrationCertificate", image1);

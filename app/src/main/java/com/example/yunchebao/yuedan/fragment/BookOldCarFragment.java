@@ -22,13 +22,16 @@ import com.coorchice.library.SuperTextView;
 import com.costans.PlatformContans;
 import com.example.yunchebao.R;
 import com.example.yunchebao.yuedan.SelectCarTypeActivity;
+import com.google.gson.Gson;
 import com.http.HttpProxy;
 import com.http.ICallBack;
 import com.nohttp.sample.BaseFragment;
 import com.payencai.library.util.ToastUtil;
 import com.tool.WheelView;
 import com.vipcenter.RegisterActivity;
+import com.vipcenter.model.MyCar;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -47,8 +50,8 @@ import butterknife.ButterKnife;
 public class BookOldCarFragment extends BaseFragment {
     @BindView(R.id.et_price)
     EditText et_price;
-    @BindView(R.id.et_brand)
-    TextView et_brand;
+    @BindView(R.id.tv_type)
+    TextView tv_type;
     @BindView(R.id.et_color)
     EditText et_color;
     @BindView(R.id.et_dis)
@@ -134,7 +137,7 @@ public class BookOldCarFragment extends BaseFragment {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1 && data != null) {
             name = data.getStringExtra("name");
-            et_brand.setText(name);
+            tv_type.setText(name);
         }
     }
 
@@ -145,9 +148,7 @@ public class BookOldCarFragment extends BaseFragment {
                 startActivityForResult(new Intent(getContext(), SelectCarTypeActivity.class), 1);
             }
         });
-        if(MyApplication.getUserInfo().getCarList().size()>0){
-            et_brand.setText(MyApplication.getUserInfo().getCarList().get(0).getModels());
-        }
+
         rl_num.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -164,10 +165,10 @@ public class BookOldCarFragment extends BaseFragment {
                 }
                 price = Double.parseDouble(price2);
                 mileage = et_dis.getEditableText().toString();
-                brand = et_brand.getText().toString();
+                brand = tv_type.getText().toString();
                 color = et_color.getEditableText().toString();
                 detail = et_des.getEditableText().toString();
-                carCategory = et_brand.getText().toString();
+                carCategory = tv_type.getText().toString();
                 if (TextUtils.isEmpty(mileage)) {
                     ToastUtil.showToast(getContext(), "输入不能为空！");
                     return;
@@ -195,6 +196,40 @@ public class BookOldCarFragment extends BaseFragment {
                     startActivity(new Intent(getContext(), RegisterActivity.class));
 
                 }
+            }
+        });
+        getDefaultCar();
+    }
+    private void getDefaultCar() {
+        HttpProxy.obtain().post(PlatformContans.DrivingLicense.getApplicationByUserId, MyApplication.token, "", new ICallBack() {
+            @Override
+            public void OnSuccess(String result) {
+                Log.e("mycar", result);
+                try {
+                    JSONObject jsonObject = new JSONObject(result);
+                    JSONArray data = jsonObject.getJSONArray("data");
+                    for (int i = 0; i < data.length(); i++) {
+                        JSONObject item = data.getJSONObject(i);
+                        MyCar myCar = new Gson().fromJson(item.toString(), MyCar.class);
+                        if(myCar.getType()==2&&myCar.getIsDefault()==1){
+                            tv_type.setText(myCar.getModels());
+                            break;
+                        }else{
+                            if(myCar.getType()==2){
+                                tv_type.setText(myCar.getModels());
+                                break;
+                            }
+                        }
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(String error) {
+
             }
         });
     }

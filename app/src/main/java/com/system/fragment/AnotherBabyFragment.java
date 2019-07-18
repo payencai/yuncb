@@ -203,6 +203,7 @@ public class AnotherBabyFragment extends Fragment {
     }
 
     public void getNewApplyCount() {
+        count=0;
         if(MyApplication.isIsLogin())
         HttpProxy.obtain().get(PlatformContans.Chat.getFriendApplyList, MyApplication.token, new ICallBack() {
             @Override

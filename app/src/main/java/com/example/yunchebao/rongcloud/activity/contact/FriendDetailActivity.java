@@ -78,32 +78,34 @@ public class FriendDetailActivity extends AppCompatActivity {
     @BindView(R.id.iv_top)
     ImageView iv_top;
     @BindView(R.id.rl_clears)
-    RelativeLayout   rl_clears;
+    RelativeLayout rl_clears;
     @BindView(R.id.cd_car)
     CardView cd_card;
     @BindView(R.id.sex)
-    TextView  tv_sex;
+    TextView tv_sex;
     @BindView(R.id.car)
-    TextView  tv_car;
+    TextView tv_car;
     @BindView(R.id.nickname)
     TextView tv_nickname;
     @BindView(R.id.tv_tag)
     TextView tv_tag;
     @BindView(R.id.rl_tag)
-    RelativeLayout  rl_tag;
+    RelativeLayout rl_tag;
     Conversation.ConversationNotificationStatus conversationNotificationStatus1;
     String id;
     String name;
     String tag;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        id=getIntent().getStringExtra("id");
+        id = getIntent().getStringExtra("id");
         setContentView(R.layout.activity_friend_detail);
         ButterKnife.bind(this);
         ImmersionBar.with(this).autoDarkModeEnable(true).fitsSystemWindows(true).statusBarColor(R.color.white).init();
         initView();
     }
+
     public void getTag() {
 
         HttpProxy.obtain().get(PlatformContans.Label.getLabelList, MyApplication.token, new ICallBack() {
@@ -118,13 +120,13 @@ public class FriendDetailActivity extends AppCompatActivity {
                         JSONObject item = data.getJSONObject(i);
                         NewTag newTag = new Gson().fromJson(item.toString(), NewTag.class);
                         for (int j = 0; j < newTag.getList().size(); j++) {
-                            if(id.equals(newTag.getList().get(j).getUserId())){
-                                tag=tag+" "+newTag.getName();
+                            if (id.equals(newTag.getList().get(j).getUserId())) {
+                                tag = tag + " " + newTag.getName();
                             }
                         }
                     }
-                    if(!TextUtils.isEmpty(tag))
-                      tv_tag.setText(tag.replace("null"," "));
+                    if (!TextUtils.isEmpty(tag))
+                        tv_tag.setText(tag.replace("null", " "));
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -137,6 +139,7 @@ public class FriendDetailActivity extends AppCompatActivity {
             }
         });
     }
+
     private void initWindow(View view) {
         EasyPopup mCirclePop = EasyPopup.create()
                 .setContentView(this, R.layout.dialog_friend_detail)
@@ -155,6 +158,10 @@ public class FriendDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 mCirclePop.dismiss();
+                if(isInBlackList(id)){
+                    ToastUtil.showToast(FriendDetailActivity.this,"已经在黑名单不能重复添加");
+                    return;
+                }
                 addToBlack(id);
             }
         });
@@ -168,12 +175,33 @@ public class FriendDetailActivity extends AppCompatActivity {
 
         mCirclePop.showAtAnchorView(view, YGravity.BELOW, XGravity.ALIGN_RIGHT, 0, 0);
     }
+    boolean isIn=false;
+    private boolean isInBlackList(String userId){
 
+        RongIM.getInstance().getBlacklist(new RongIMClient.GetBlacklistCallback() {
+            @Override
+            public void onSuccess(String[] strings) {
+                for(String id:strings){
+                    if(id.equals(userId)){
+                        isIn=true;
+                        break;
+                    }
+                }
+            }
+
+            @Override
+            public void onError(RongIMClient.ErrorCode errorCode) {
+
+            }
+        });
+        return  isIn;
+    }
     private void addToBlack(String userId) {
         RongIM.getInstance().addToBlacklist(userId, new RongIMClient.OperationCallback() {
             @Override
             public void onSuccess() {
                 Toast.makeText(FriendDetailActivity.this, "拉黑成功", Toast.LENGTH_SHORT).show();
+
             }
 
             @Override
@@ -217,7 +245,8 @@ public class FriendDetailActivity extends AppCompatActivity {
             }
         });
     }
-    private void setUi( UserMsg userMsg){
+
+    private void setUi(UserMsg userMsg) {
         tv_sex.setText(userMsg.getSex());
         RequestOptions mRequestOptions = RequestOptions.circleCropTransform()
                 .diskCacheStrategy(DiskCacheStrategy.NONE)//不做磁盘缓存
@@ -228,28 +257,37 @@ public class FriendDetailActivity extends AppCompatActivity {
         chatname.setText(userMsg.getName());
         account.setText(userMsg.getUsername());
         tv_nickname.setText("");
-        if(userMsg.getCarShowState()==1){
-            cd_card.setVisibility(View.VISIBLE);
-            if(userMsg.getCarList()!=null){
-                if(userMsg.getCarList().size()>0)
-                    tv_car.setText(userMsg.getCarList().get(0).getModels());
+        if (userMsg.getCarShowState() == 1) {
+
+            if (userMsg.getCarList() != null) {
+                if (userMsg.getCarList().size() > 0)
+                    for (int i = 0; i < userMsg.getCarList().size(); i++) {
+                        if (userMsg.getCarList().get(i).getIsDefault() == 1){
+                            tv_car.setText(userMsg.getCarList().get(i).getModels());
+                            cd_card.setVisibility(View.VISIBLE);
+                            break;
+                        }
+
+                    }
+
             }
 
-        }else{
+        } else {
             cd_card.setVisibility(View.GONE);
         }
     }
-    private void getDetail(String id){
-        Map<String,Object> params=new HashMap<>();
-        params.put("userId",id);
+
+    private void getDetail(String id) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("userId", id);
         HttpProxy.obtain().get(PlatformContans.User.getUserResultById, params, MyApplication.token, new ICallBack() {
             @Override
             public void OnSuccess(String result) {
-                Log.e("detail",result);
+                Log.e("detail", result);
                 try {
-                    JSONObject jsonObject=new JSONObject(result);
-                    JSONObject data=jsonObject.getJSONObject("data");
-                    mUserMsg=new Gson().fromJson(data.toString(),UserMsg.class);
+                    JSONObject jsonObject = new JSONObject(result);
+                    JSONObject data = jsonObject.getJSONObject("data");
+                    mUserMsg = new Gson().fromJson(data.toString(), UserMsg.class);
                     setUi(mUserMsg);
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -262,11 +300,12 @@ public class FriendDetailActivity extends AppCompatActivity {
             }
         });
     }
+
     private void initView() {
         head.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ArrayList<String> images=new ArrayList<>();
+                ArrayList<String> images = new ArrayList<>();
                 images.add(mUserMsg.getHeadPortrait());
                 PictureConfig config = new PictureConfig.Builder()
                         .setListData(images)  //图片数据List<String> list
@@ -282,7 +321,7 @@ public class FriendDetailActivity extends AppCompatActivity {
         sendmsg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                RongIM.getInstance().startPrivateChat(FriendDetailActivity.this,id, mUserMsg.getName());
+                RongIM.getInstance().startPrivateChat(FriendDetailActivity.this, id, mUserMsg.getName());
             }
         });
         back.setOnClickListener(new View.OnClickListener() {
@@ -315,7 +354,7 @@ public class FriendDetailActivity extends AppCompatActivity {
                 RongIM.getInstance().deleteMessages(Conversation.ConversationType.PRIVATE, id, new RongIMClient.ResultCallback<Boolean>() {
                     @Override
                     public void onSuccess(Boolean aBoolean) {
-                        ToastUtil.showToast(FriendDetailActivity.this,"清除成功！");
+                        ToastUtil.showToast(FriendDetailActivity.this, "清除成功！");
                     }
 
                     @Override
@@ -357,17 +396,17 @@ public class FriendDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                 RongIM.getInstance().setConversationToTop(Conversation.ConversationType.PRIVATE, id, isTop, new RongIMClient.ResultCallback<Boolean>() {
-                     @Override
-                     public void onSuccess(Boolean aBoolean) {
-                         getIsTop();
-                     }
+                RongIM.getInstance().setConversationToTop(Conversation.ConversationType.PRIVATE, id, isTop, new RongIMClient.ResultCallback<Boolean>() {
+                    @Override
+                    public void onSuccess(Boolean aBoolean) {
+                        getIsTop();
+                    }
 
-                     @Override
-                     public void onError(RongIMClient.ErrorCode errorCode) {
+                    @Override
+                    public void onError(RongIMClient.ErrorCode errorCode) {
 
-                     }
-                 });
+                    }
+                });
             }
         });
         findViewById(R.id.rl_nick).setOnClickListener(new View.OnClickListener() {
@@ -379,6 +418,7 @@ public class FriendDetailActivity extends AppCompatActivity {
 
 
     }
+
     private void updateNick(String name) {
         Map<String, Object> params = new HashMap<>();
         params.put("nickName", name);
@@ -397,14 +437,15 @@ public class FriendDetailActivity extends AppCompatActivity {
             }
         });
     }
+
     private void showNickDialog() {
         final Dialog dialog = new Dialog(this, R.style.dialog);
         View dialogView = LayoutInflater.from(this).inflate(R.layout.dialog_nick, null);
         //获得dialog的window窗口
         //将自定义布局加载到dialog上
-        TextView tv_confirm= (TextView) dialogView.findViewById(R.id.tv_confirm);
-        EditText et_nick= (EditText) dialogView.findViewById(R.id.et_nick);
-        TextView tv_cancel= (TextView) dialogView.findViewById(R.id.tv_cancel);
+        TextView tv_confirm = (TextView) dialogView.findViewById(R.id.tv_confirm);
+        EditText et_nick = (EditText) dialogView.findViewById(R.id.et_nick);
+        TextView tv_cancel = (TextView) dialogView.findViewById(R.id.tv_cancel);
         tv_cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -415,8 +456,8 @@ public class FriendDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
-                String name=et_nick.getEditableText().toString();
-                if(!TextUtils.isEmpty(name)){
+                String name = et_nick.getEditableText().toString();
+                if (!TextUtils.isEmpty(name)) {
                     updateNick(name);
                     tv_nickname.setText(name);
                 }
@@ -426,36 +467,37 @@ public class FriendDetailActivity extends AppCompatActivity {
         dialog.setCanceledOnTouchOutside(false);
         dialog.show();
         Window window = dialog.getWindow();
-        WindowManager windowManager=getWindowManager();
-        Display display=windowManager.getDefaultDisplay();
+        WindowManager windowManager = getWindowManager();
+        Display display = windowManager.getDefaultDisplay();
         //设置dialog在屏幕底部
         window.setGravity(Gravity.CENTER);
         //设置dialog弹出时的动画效果，从屏幕底部向上弹出
         //获得window窗口的属性
         android.view.WindowManager.LayoutParams lp = window.getAttributes();
         //设置窗口宽度为充满全屏
-        lp.width = (int) (display.getWidth()*0.7);
+        lp.width = (int) (display.getWidth() * 0.7);
         //设置窗口高度为包裹内容
         lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
         //将设置好的属性set回去
         window.setAttributes(lp);
     }
-    boolean isTop=true;
-    private void getIsTop(){
+
+    boolean isTop = true;
+
+    private void getIsTop() {
 
         RongIM.getInstance().getConversation(Conversation.ConversationType.PRIVATE, id, new RongIMClient.ResultCallback<Conversation>() {
             @Override
             public void onSuccess(Conversation conversation) {
-                if(conversation==null){
-                    isTop=true;
+                if (conversation == null) {
+                    isTop = true;
                     iv_top.setImageResource(R.mipmap.white_switch);
-                }
-                else{
-                    if(conversation.isTop()){
-                        isTop=false;
+                } else {
+                    if (conversation.isTop()) {
+                        isTop = false;
                         iv_top.setImageResource(R.mipmap.blue_switch);
-                    }else{
-                        isTop=true;
+                    } else {
+                        isTop = true;
                         iv_top.setImageResource(R.mipmap.white_switch);
                     }
                 }
@@ -468,7 +510,8 @@ public class FriendDetailActivity extends AppCompatActivity {
         });
 
     }
-    private void getStatus(){
+
+    private void getStatus() {
         RongIM.getInstance().getConversationNotificationStatus(Conversation.ConversationType.PRIVATE, id, new RongIMClient.ResultCallback<Conversation.ConversationNotificationStatus>() {
             @Override
             public void onSuccess(Conversation.ConversationNotificationStatus conversationNotificationStatus) {

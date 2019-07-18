@@ -37,6 +37,9 @@ import com.system.model.AddressBean;
 import com.tool.WheelView;
 import com.vipcenter.RegisterActivity;
 import com.example.yunchebao.yuedan.model.WashCarType;
+import com.vipcenter.model.MyCar;
+import com.vipcenter.model.MyFocus;
+import com.vipcenter.model.UserInfo;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -360,6 +363,8 @@ public class BookWashCarFragment extends BaseFragment implements OnDateSetListen
         params.height = WindowManager.LayoutParams.WRAP_CONTENT;
         window.setAttributes(params);
     }
+
+
     private void initView() {
         initTimePickerView();
         //initDatePicker();
@@ -378,6 +383,7 @@ public class BookWashCarFragment extends BaseFragment implements OnDateSetListen
                 }
             }
         });
+
 
         addressLay.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -489,8 +495,41 @@ public class BookWashCarFragment extends BaseFragment implements OnDateSetListen
             }
         });
         getData();
+        getDefaultCar();
     }
+    private void getDefaultCar() {
+        HttpProxy.obtain().post(PlatformContans.DrivingLicense.getApplicationByUserId, MyApplication.token, "", new ICallBack() {
+            @Override
+            public void OnSuccess(String result) {
+                Log.e("mycar", result);
+                try {
+                    JSONObject jsonObject = new JSONObject(result);
+                    JSONArray data = jsonObject.getJSONArray("data");
+                    for (int i = 0; i < data.length(); i++) {
+                        JSONObject item = data.getJSONObject(i);
+                        MyCar myCar = new Gson().fromJson(item.toString(), MyCar.class);
+                        if(myCar.getType()==2&&myCar.getIsDefault()==1){
+                            tv_cartype.setText(myCar.getModels());
+                            break;
+                        }else{
+                            if(myCar.getType()==2){
+                                tv_cartype.setText(myCar.getModels());
+                                break;
+                            }
+                        }
+                    }
 
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(String error) {
+
+            }
+        });
+    }
     private Dialog dialog;
 
 

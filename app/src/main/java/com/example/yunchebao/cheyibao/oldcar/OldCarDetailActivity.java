@@ -384,17 +384,8 @@ public class OldCarDetailActivity extends NoHttpBaseActivity {
                     startActivity(new Intent(OldCarDetailActivity.this, RegisterActivity.class));
                     return;
                 }
-                if(MyApplication.getUserInfo().getId().equals( mOldCar.getUserId())){
-                    ToastUtil.showToast(this,"你不能收藏自己发布的二手车");
-                    return;
-                }
-                if (isCollect == 0) {
-                    isCollect = 1;
-                    collectIcon.setImageResource(R.mipmap.collect_yellow);
-                } else if (isCollect == 1) {
-                    isCollect = 0;
-                    collectIcon.setImageResource(R.mipmap.collect_gray_hole);
-                }
+
+
                 collect();
                 break;
             case R.id.back:
@@ -486,7 +477,7 @@ public class OldCarDetailActivity extends NoHttpBaseActivity {
             token = MyApplication.token;
         }
         params.put("carImage", mOldCar.getCarImage());
-        params.put("carPrice", mOldCar.getNewPrice());
+        params.put("carPrice", mOldCar.getOldPrice());
         params.put("firstName", mOldCar.getFirstName());
         params.put("secondName", mOldCar.getSecondName());
         params.put("thirdName", mOldCar.getThirdName());
@@ -499,6 +490,24 @@ public class OldCarDetailActivity extends NoHttpBaseActivity {
                 Log.e("result", result);
                 try {
                     JSONObject jsonObject = new JSONObject(result);
+                    int code=jsonObject.getInt("resultCode");
+                    if(code==0){
+                        if (isCollect == 0) {
+                            if(MyApplication.getUserInfo().getId().equals( mOldCar.getUserId())){
+                                ToastUtil.showToast(OldCarDetailActivity.this,"你不能收藏自己发布的二手车");
+                                return;
+                            }
+                            isCollect = 1;
+                            collectIcon.setImageResource(R.mipmap.collect_yellow);
+                        } else if (isCollect == 1) {
+                            isCollect = 0;
+                            collectIcon.setImageResource(R.mipmap.collect_gray_hole);
+                        }
+                        ToastUtil.showToast(OldCarDetailActivity.this,"收藏成功");
+                    }else{
+                        String msg=jsonObject.getString("message");
+                        ToastUtil.showToast(OldCarDetailActivity.this,msg);
+                    }
 
                 } catch (JSONException e) {
                     e.printStackTrace();

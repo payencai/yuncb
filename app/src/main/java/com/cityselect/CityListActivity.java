@@ -256,6 +256,7 @@ public class CityListActivity extends Activity {
                 Setting.Save2SharedPreferences(CityListActivity.this, "city",
                         cityModel.getCityName());
                 Intent intent =new Intent();
+
                 intent.putExtra("city",cityModel.getCityName());
                 setResult(2,intent);
                 finish();

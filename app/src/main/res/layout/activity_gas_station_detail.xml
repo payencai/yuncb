@@ -9,7 +9,7 @@
         android:background="#f3f3f3"
         android:id="@+id/appbarlayout"
         android:layout_width="match_parent"
-        android:layout_height="435dp"
+        android:layout_height="445dp"
         app:elevation="0dp"
         android:fitsSystemWindows="true"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
@@ -17,7 +17,7 @@
         <android.support.design.widget.CollapsingToolbarLayout
             android:id="@+id/collapsingToolbar"
             android:layout_width="match_parent"
-            android:layout_height="385dp"
+            android:layout_height="395dp"
             android:layout_marginBottom="1dp"
             android:fitsSystemWindows="true"
             app:contentScrim="@android:color/transparent"
@@ -25,7 +25,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="385dp"
+                android:layout_height="395dp"
                 android:scaleType="centerInside"
                 app:layout_collapseMode="pin"
                 app:layout_collapseParallaxMultiplier="0.7"
@@ -53,7 +53,7 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="70dp"
+                    android:layout_height="80dp"
                     android:background="@color/white"
                     android:orientation="horizontal">
 
@@ -64,20 +64,23 @@
                         android:orientation="vertical"
                         android:padding="10dp">
                         <LinearLayout
+                            android:layout_toLeftOf="@id/ll_shop"
                             android:orientation="vertical"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
                             <LinearLayout
+
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:gravity="center_vertical"
                                 android:orientation="horizontal">
 
                                 <TextView
+                                    android:maxLines="2"
                                     android:id="@+id/tv_shopname"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="兴启晟"
+                                    android:text="兴兴启晟兴启晟兴启晟兴启晟兴启晟兴启晟启晟"
                                     android:textColor="@color/black_33" />
 
                                 <ImageView
@@ -92,7 +95,7 @@
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="10dp"
+                                android:layout_marginTop="5dp"
                                 android:orientation="horizontal">
 
                                 <TextView

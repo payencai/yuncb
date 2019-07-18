@@ -93,20 +93,20 @@ public class AddGroupDetailActivity extends AppCompatActivity {
         Glide.with(this).load(mGroup.getImage()).into(head);
         getGroupData(mGroup.getHxCrowdId()+"");
     }
-    int crowId;
+    long crowId;
     private void getGroupData(String id) {
         Map<String, Object> params = new HashMap<>();
         params.put("crowdId", id);
         HttpProxy.obtain().get(PlatformContans.Chat.getCrowdDetailsByCrowdId, params, MyApplication.token, new ICallBack() {
             @Override
             public void OnSuccess(String result) {
-                Log.e("getGroupData", result);
+                Log.e("getGroupDetail", result);
                 try {
-                    JSONObject Json = new JSONObject(result);
-                    crowId=Json.getInt("id");
-                    JSONObject data = Json.getJSONObject("data");
+                    JSONObject jsonObject = new JSONObject(result);
+                    JSONObject data = jsonObject.getJSONObject("data");
                     JSONArray indexList = data.getJSONArray("indexList");
                     tv_number.setText(indexList.length()+"人");
+                    crowId=jsonObject.getLong("id");
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -151,7 +151,7 @@ public class AddGroupDetailActivity extends AppCompatActivity {
 
     private void apply(String reason, final Dialog dialog) {
         Map<String, Object> params = new HashMap<>();
-        params.put("crowdId", mGroup.getId()+"");
+        params.put("crowdId", mGroup.getHxCrowdId()+"");
         params.put("applyReason", reason);
 
 

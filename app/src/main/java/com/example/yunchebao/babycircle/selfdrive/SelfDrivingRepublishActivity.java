@@ -39,6 +39,7 @@ import com.payencai.library.util.ToastUtil;
 import com.tool.ActivityAnimationUtils;
 import com.tool.ActivityConstans;
 import com.tool.BottomMenuDialog;
+import com.tool.CheckDoubleClick;
 import com.vipcenter.RegisterActivity;
 
 import org.json.JSONException;
@@ -424,6 +425,9 @@ public class SelfDrivingRepublishActivity extends NoHttpFragmentBaseActivity imp
 
     @OnClick({R.id.back, R.id.text1, R.id.text2, R.id.settingLay, R.id.addressLay, R.id.description, R.id.time1, R.id.time2})
     public void OnClick(View v) {
+        if(CheckDoubleClick.isFastDoubleClick()){
+            return;
+        }
         switch (v.getId()) {
             case R.id.back:
                 onBackPressed();

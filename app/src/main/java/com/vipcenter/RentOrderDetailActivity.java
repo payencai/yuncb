@@ -201,7 +201,7 @@ public class RentOrderDetailActivity extends AppCompatActivity {
         tv_addr.setText(mRentOrderDetail.getShopProvince()+mRentOrderDetail.getShopCity()+mRentOrderDetail.getShopArea()+mRentOrderDetail.getShopAddress());
         tv_shop.setText(mRentOrderDetail.getShopName());
         tv_phone.setText(mRentOrderDetail.getShopSaleTelephone());
-        tv_avgprice.setText("￥"+mRentOrderDetail.getTotal());
+        tv_avgprice.setText("￥"+mRentOrderDetail.getDayPrice());
         tv_auto.setText(mRentOrderDetail.getSeat()+"座");
         tv_date.setText("x"+mRentOrderDetail.getRentDay());
         Glide.with(this).load(mRentOrderDetail.getImage()).into(iv_car);

@@ -16,6 +16,7 @@ import com.example.yunchebao.babycircle.carfriend.DriverFriendsDetailActivity;
 import com.google.gson.Gson;
 import com.http.HttpProxy;
 import com.http.ICallBack;
+import com.lljjcoder.style.citylist.Toast.ToastUtils;
 import com.payencai.library.util.ToastUtil;
 import com.tool.ActivityConstans;
 import com.tool.UIControlUtils;
@@ -41,8 +42,9 @@ public class MyFocusActivity extends AppCompatActivity {
     FocusAdapter mFocusAdapter;
     @BindView(R.id.rv_focus)
     RecyclerView rv_focus;
-    int page=1;
-    boolean isLoadMore=false;
+    int page = 1;
+    boolean isLoadMore = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +53,7 @@ public class MyFocusActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         initView();
     }
+
     @OnClick({R.id.back})
     public void OnClick(View v) {
         switch (v.getId()) {
@@ -59,16 +62,31 @@ public class MyFocusActivity extends AppCompatActivity {
                 break;
         }
     }
-    private void focus(String userId){
-        Map<String,Object> params=new HashMap<>();
-        params.put("otherId",userId);
-        params.put("type","1");
-        HttpProxy.obtain().post(PlatformContans.User.addUserFocus,MyApplication.token, params,  new ICallBack() {
+
+    private void focus(String userId) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("otherId", userId);
+        params.put("type", "1");
+        HttpProxy.obtain().post(PlatformContans.User.addUserFocus, MyApplication.token, params, new ICallBack() {
             @Override
             public void OnSuccess(String result) {
-                Log.e("focus",result);
-                ToastUtil.showToast(MyFocusActivity.this,"关注成功");
-                refresh();
+                Log.e("focus", result);
+                JSONObject jsonObject = null;
+                try {
+                    jsonObject = new JSONObject(result);
+                    int code = jsonObject.getInt("resultCode");
+                    if (code == 0) {
+                        ToastUtil.showToast(MyFocusActivity.this, "关注成功");
+                        refresh();
+                    } else {
+                        String msg = jsonObject.getString("message");
+                        ToastUtils.showLongToast(MyFocusActivity.this, msg);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
             }
 
             @Override
@@ -77,22 +95,34 @@ public class MyFocusActivity extends AppCompatActivity {
             }
         });
     }
-    private void refresh(){
-        page=1;
+
+    private void refresh() {
+        page = 1;
         mMyFocusList.clear();
-        mFocusAdapter.setNewData(mMyFocusList);
         getData();
     }
 
-    private void delfocus(String userId){
-        Map<String,Object> params=new HashMap<>();
-        params.put("otherId",userId);
-        HttpProxy.obtain().post(PlatformContans.User.deleteUserFocus,MyApplication.token, params,  new ICallBack() {
+    private void delfocus(String userId) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("otherId", userId);
+        HttpProxy.obtain().post(PlatformContans.User.deleteUserFocus, MyApplication.token, params, new ICallBack() {
             @Override
             public void OnSuccess(String result) {
-                Log.e("focus",result);
-                ToastUtil.showToast(MyFocusActivity.this,"已取消");
-                refresh();
+                Log.e("focus", result);
+                JSONObject jsonObject = null;
+                try {
+                    jsonObject = new JSONObject(result);
+                    int code = jsonObject.getInt("resultCode");
+                    if (code == 0) {
+                        ToastUtil.showToast(MyFocusActivity.this, "取消成功");
+                        refresh();
+                    } else {
+                        String msg = jsonObject.getString("message");
+                        ToastUtils.showLongToast(MyFocusActivity.this, msg);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
 
             @Override
@@ -101,30 +131,28 @@ public class MyFocusActivity extends AppCompatActivity {
             }
         });
     }
+
     private void initView() {
-        mMyFocusList=new ArrayList<>();
-        mFocusAdapter=new FocusAdapter(R.layout.item_focus,mMyFocusList);
+        mMyFocusList = new ArrayList<>();
+        mFocusAdapter = new FocusAdapter(R.layout.item_focus, mMyFocusList);
         mFocusAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
             @Override
             public void onLoadMoreRequested() {
                 page++;
-                isLoadMore=true;
+                isLoadMore = true;
                 getData();
             }
-        },rv_focus);
+        }, rv_focus);
 
         mFocusAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
             @Override
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
-                MyFocus myFocus= (MyFocus) adapter.getItem(position);
-                if(view.getId()==R.id.tv_chat){
+                MyFocus myFocus = (MyFocus) adapter.getItem(position);
+                if (view.getId() == R.id.tv_chat) {
                     RongIM.getInstance().startPrivateChat(MyFocusActivity.this, myFocus.getUserId(), myFocus.getName());
-                }else  if(view.getId()==R.id.tv_focus){
-                    if(myFocus.getIsFocus()==0){
-                        focus(myFocus.getUserId());
-                    }else{
-                        delfocus(myFocus.getUserId());
-                    }
+                } else if (view.getId() == R.id.tv_focus) {
+                    delfocus(myFocus.getUserId());
+
                 }
             }
         });
@@ -132,13 +160,14 @@ public class MyFocusActivity extends AppCompatActivity {
         rv_focus.setAdapter(mFocusAdapter);
         getData();
     }
-    private void getData(){
-        Map<String,Object> params=new HashMap<>();
-        params.put("page",page);
+
+    private void getData() {
+        Map<String, Object> params = new HashMap<>();
+        params.put("page", page);
         HttpProxy.obtain().get(PlatformContans.User.getUserFocusList, params, MyApplication.token, new ICallBack() {
             @Override
             public void OnSuccess(String result) {
-                Log.e("result",result);
+                Log.e("result", result);
                 try {
                     JSONObject jsonObject = new JSONObject(result);
                     int code = jsonObject.getInt("resultCode");

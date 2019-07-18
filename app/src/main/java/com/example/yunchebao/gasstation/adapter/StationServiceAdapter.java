@@ -26,7 +26,7 @@ public class StationServiceAdapter extends BaseQuickAdapter<StationService, Base
         TextView price= (SuperTextView) helper.getView(R.id.price);
         TextView tvGoodsDescription= (TextView) helper.getView(R.id.tvGoodsDescription);
         goodsCategoryName.setText(item.getTitle());
-        price.setText("￥"+item.getPrice());
+        price.setText(item.getPrice()+"元");
         tvGoodsDescription.setText(item.getContent());
     }
 }

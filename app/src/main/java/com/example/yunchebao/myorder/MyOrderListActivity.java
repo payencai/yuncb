@@ -37,7 +37,7 @@ import butterknife.OnClick;
 public class MyOrderListActivity extends NoHttpFragmentBaseActivity {
 
     @BindView(R.id.tab_order)
-    SlidingTabLayout scrollIndicatorView;
+    SlidingTabLayout tab_order;
     @BindView(R.id.viewPager)
     NoScrollViewPager viewPager;
     ArrayList<Fragment> mFragments;
@@ -57,7 +57,8 @@ public class MyOrderListActivity extends NoHttpFragmentBaseActivity {
             OrderListFragment orderListFragment=OrderListFragment.newInstance(i);
             mFragments.add(orderListFragment);
         }
-        scrollIndicatorView.setViewPager(viewPager,mTitles,this,mFragments);
+
+        tab_order.setViewPager(viewPager,mTitles,this,mFragments);
     }
 
 

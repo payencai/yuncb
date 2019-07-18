@@ -9,7 +9,7 @@
         android:background="#f3f3f3"
         android:id="@+id/appbarlayout"
         android:layout_width="match_parent"
-        android:layout_height="445dp"
+        android:layout_height="455dp"
         app:elevation="0dp"
         android:fitsSystemWindows="true"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
@@ -17,7 +17,7 @@
         <android.support.design.widget.CollapsingToolbarLayout
             android:id="@+id/collapsingToolbar"
             android:layout_width="match_parent"
-            android:layout_height="395dp"
+            android:layout_height="405dp"
             android:layout_marginBottom="1dp"
             android:fitsSystemWindows="true"
             app:contentScrim="@android:color/transparent"
@@ -25,7 +25,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="395dp"
+                android:layout_height="410dp"
                 android:scaleType="centerInside"
                 app:layout_collapseMode="pin"
                 app:layout_collapseParallaxMultiplier="0.7"
@@ -53,7 +53,7 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="70dp"
+                    android:layout_height="80dp"
                     android:background="@color/white"
                     android:orientation="horizontal">
 
@@ -75,12 +75,13 @@
                                 android:orientation="horizontal">
 
                                 <TextView
+                                    android:textSize="14sp"
                                     android:ellipsize="end"
-                                    android:singleLine="true"
+                                    android:maxLines="2"
                                     android:id="@+id/tv_shopname"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="兴兴启晟兴启晟兴启晟兴启晟启晟"
+                                    android:text="兴兴启晟兴兴兴启晟兴启晟兴启晟兴启晟启晟启晟兴启晟兴启晟启晟"
                                     android:textColor="@color/black_33" />
 
                                 <ImageView
@@ -95,7 +96,7 @@
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="8dp"
+                                android:layout_marginTop="5dp"
                                 android:orientation="horizontal">
 
                                 <TextView
@@ -192,16 +193,16 @@
 
                     android:layout_marginTop="5dp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="75dp"
                     android:background="@color/white"
                     android:orientation="horizontal">
 
                     <LinearLayout
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_weight="5"
                         android:orientation="vertical"
-                        android:padding="10dp">
+                        android:padding="8dp">
                         <LinearLayout
                             android:gravity="center_vertical"
                             android:layout_width="match_parent"
@@ -222,7 +223,7 @@
                                 android:textSize="12sp" />
                         </LinearLayout>
                         <LinearLayout
-                            android:layout_marginTop="5dp"
+                            android:layout_marginTop="2dp"
                             android:gravity="center_vertical"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content">

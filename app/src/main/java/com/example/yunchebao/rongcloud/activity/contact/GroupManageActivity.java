@@ -28,6 +28,7 @@ import com.example.yunchebao.rongcloud.sidebar.ContactModel;
 import com.example.yunchebao.rongcloud.sidebar.ContactsAdapter;
 import com.example.yunchebao.rongcloud.sidebar.PinnedHeaderDecoration;
 import com.payencai.library.util.ToastUtil;
+import com.tool.CheckDoubleClick;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -321,6 +322,9 @@ public class GroupManageActivity extends AppCompatActivity {
         mAdapter.setOnItemClickListener(new ContactsAdapter.OnItemClickListener() {
             @Override
             public void onClick(int position, ImageView imageView) {
+                if(CheckDoubleClick.isFastDoubleClick()){
+                    return;
+                }
                 ContactModel contactModel = mShowModels.get(position);
                 mShowModels.remove(contactModel);
                 if (!contactModel.isSelect()) {

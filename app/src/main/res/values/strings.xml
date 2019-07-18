@@ -85,7 +85,7 @@
     <string name="no_network_view_hint">网络异常</string>
     <string name="select_car_model">选择车型</string>
     <string name="please_select_car_models">请选择车型</string>
-    <string name="select_shop_count">选择上家数量</string>
+    <string name="select_shop_count">选择商家数量</string>
     <string name="please_shop_count">选择报价商家数量</string>
     <string name="contact_info">联系信息</string>
     <string name="contact_person_1">联系人*</string>

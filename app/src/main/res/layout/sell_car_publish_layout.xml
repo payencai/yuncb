@@ -193,7 +193,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:text="km"
+                android:text="公里"
                 android:textColor="@color/black_33"
                 android:textSize="12sp" />
         </RelativeLayout>
@@ -273,7 +273,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:text="元"
+                android:text="万元"
                 android:textColor="@color/black_33"
                 android:textSize="12sp" />
 

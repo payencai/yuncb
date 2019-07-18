@@ -12,7 +12,7 @@
              android:background="#f3f3f3"
              android:id="@+id/appbarlayout"
              android:layout_width="match_parent"
-             android:layout_height="435dp"
+             android:layout_height="455dp"
              app:elevation="0dp"
              android:fitsSystemWindows="true"
              android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
@@ -20,7 +20,7 @@
              <android.support.design.widget.CollapsingToolbarLayout
                  android:id="@+id/collapsingToolbar"
                  android:layout_width="match_parent"
-                 android:layout_height="385dp"
+                 android:layout_height="405dp"
                  android:layout_marginBottom="1dp"
                  android:fitsSystemWindows="true"
                  app:contentScrim="@android:color/transparent"
@@ -28,7 +28,7 @@
 
                  <LinearLayout
                      android:layout_width="match_parent"
-                     android:layout_height="385dp"
+                     android:layout_height="400dp"
                      android:scaleType="centerInside"
                      app:layout_collapseMode="pin"
                      app:layout_collapseParallaxMultiplier="0.7"
@@ -56,7 +56,7 @@
 
                      <LinearLayout
                          android:layout_width="match_parent"
-                         android:layout_height="70dp"
+                         android:layout_height="80dp"
                          android:background="@color/white"
                          android:orientation="horizontal">
 
@@ -67,6 +67,7 @@
                              android:orientation="vertical"
                              android:padding="10dp">
                              <LinearLayout
+                                 android:layout_toLeftOf="@id/ll_shop"
                                  android:orientation="vertical"
                                  android:layout_width="match_parent"
                                  android:layout_height="wrap_content">
@@ -80,7 +81,7 @@
                                          android:id="@+id/tv_shopname"
                                          android:layout_width="wrap_content"
                                          android:layout_height="wrap_content"
-                                         android:text="兴启晟"
+                                         android:text="兴兴启兴兴启晟启晟兴兴启晟启晟晟启晟"
                                          android:textColor="@color/black_33" />
 
                                      <ImageView
@@ -95,7 +96,7 @@
                                  <LinearLayout
                                      android:layout_width="match_parent"
                                      android:layout_height="wrap_content"
-                                     android:layout_marginTop="10dp"
+                                     android:layout_marginTop="5dp"
                                      android:orientation="horizontal">
 
                                      <TextView
@@ -190,7 +191,7 @@
 
                          android:layout_marginTop="5dp"
                          android:layout_width="match_parent"
-                         android:layout_height="65dp"
+                         android:layout_height="70dp"
                          android:background="@color/white"
                          android:orientation="horizontal">
 
@@ -210,17 +211,17 @@
                                      android:layout_height="10dp" />
                                  <TextView
                                      android:ellipsize="end"
-                                     android:singleLine="true"
+                                     android:maxLines="2"
                                      android:layout_marginLeft="5dp"
                                      android:id="@+id/tv_address"
                                      android:layout_width="wrap_content"
                                      android:layout_height="wrap_content"
-                                     android:text="永平路136号"
+                                     android:text="永平路136号永平路136号永平路136号永平路136号"
                                      android:textColor="@color/gray_99"
                                      android:textSize="12sp" />
                              </LinearLayout>
                              <LinearLayout
-                                 android:layout_marginTop="10dp"
+                                 android:layout_marginTop="5dp"
                                  android:gravity="center_vertical"
                                  android:layout_width="wrap_content"
                                  android:layout_height="wrap_content">

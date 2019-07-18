@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -24,10 +25,12 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.entity.UserMsg;
 import com.example.yunchebao.MyApplication;
 import com.bumptech.glide.Glide;
 import com.costans.PlatformContans;
 import com.example.yunchebao.R;
+import com.example.yunchebao.rongcloud.activity.StrangerDelActivity;
 import com.google.gson.Gson;
 import com.gyf.immersionbar.ImmersionBar;
 import com.http.HttpProxy;
@@ -37,6 +40,7 @@ import com.payencai.library.view.CircleImageView;
 import com.example.yunchebao.rongcloud.activity.GroupQrcodeActivity;
 import com.example.yunchebao.rongcloud.adapter.GridAdapter;
 import com.example.yunchebao.rongcloud.model.GroupUser;
+import com.system.MainActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -308,7 +312,13 @@ public class GroupDetailActivity extends AppCompatActivity {
         mAllGroupUser = new ArrayList();
         mShowGroupUser = new ArrayList();
         mAdapter=new GridAdapter(this,mShowGroupUser);
-
+        mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                GroupUser groupUser=mShowGroupUser.get(position);
+                getPrivateDetail(groupUser.getUserId());
+            }
+        });
         //绑定Adapter
         mGridView.setAdapter(mAdapter);
 
@@ -328,6 +338,38 @@ public class GroupDetailActivity extends AppCompatActivity {
         //第一次调用
         //setListViewHeightBasedOnChildren(mGridView);
 
+    }
+    private void getPrivateDetail(String id) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("userId", id);
+        HttpProxy.obtain().get(PlatformContans.User.getUserResultById, params, MyApplication.token, new ICallBack() {
+            @Override
+            public void OnSuccess(String result) {
+                Log.e("detail", result);
+                try {
+                    JSONObject jsonObject = new JSONObject(result);
+                    JSONObject data = jsonObject.getJSONObject("data");
+                    UserMsg userMsg = new Gson().fromJson(data.toString(), UserMsg.class);
+                    Intent intent;
+                    if ("1".equals(userMsg.getIsFriend())) {
+                        intent = new Intent(GroupDetailActivity.this, FriendDetailActivity.class);
+                        intent.putExtra("id", id);
+                        startActivity(intent);
+                    } else {
+                        intent = new Intent(GroupDetailActivity.this, StrangerDelActivity.class);
+                        intent.putExtra("id", id);
+                        startActivity(intent);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(String error) {
+
+            }
+        });
     }
     private void updateMyNick(String name){
         Map<String,Object> params=new HashMap<>();

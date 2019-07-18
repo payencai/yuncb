@@ -33,6 +33,12 @@ import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
 import com.amap.api.maps.model.LatLng;
+import com.amap.api.services.geocoder.GeocodeAddress;
+import com.amap.api.services.geocoder.GeocodeQuery;
+import com.amap.api.services.geocoder.GeocodeResult;
+import com.amap.api.services.geocoder.GeocodeSearch;
+import com.amap.api.services.geocoder.RegeocodeAddress;
+import com.amap.api.services.geocoder.RegeocodeResult;
 import com.example.yunchebao.MyApplication;
 
 import com.cityselect.CityListActivity;
@@ -280,7 +286,7 @@ public class HomeFragment extends BaseFragment {
         rootView = inflater.inflate(R.layout.fragment_home, container, false);
         ButterKnife.bind(this, rootView);
         MyApplication.setDataSave(new ListDataSave(MyApplication.getContext(), "data"));
-        if(Build.VERSION.SDK_INT>=28)
+        if (Build.VERSION.SDK_INT >= 28)
             initGPS(getContext());
         initLocation();
         getImageUrl();
@@ -288,6 +294,7 @@ public class HomeFragment extends BaseFragment {
 
         return rootView;
     }
+
     List<UrlBean> mUrlBeans = new ArrayList<>();
     List<String> images = new ArrayList<>();
     public AMapLocationClient mLocationClient = null;
@@ -311,7 +318,8 @@ public class HomeFragment extends BaseFragment {
         }
     };
     LocationManager locationManager;
-    public  void initGPS(final Context context) {
+
+    public void initGPS(final Context context) {
 
         locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
 
@@ -381,6 +389,7 @@ public class HomeFragment extends BaseFragment {
         super.onDestroy();
         destroyLocation();
     }
+
     /**
      * 停止定位
      *
@@ -401,14 +410,16 @@ public class HomeFragment extends BaseFragment {
 
         }
     }
-    public  void startLocate(){
+
+    public void startLocate() {
         mLocationClient.startLocation();
     }
+
     private void initLocation() {
         //初始化定位
         mLocationClient = new AMapLocationClient(getContext());
 //设置定位回调监听
-        mLocationOption=getDefaultOption();
+        mLocationOption = getDefaultOption();
         mLocationClient.setLocationOption(mLocationOption);
         mLocationClient.setLocationListener(mLocationListener);
         mLocationClient.startLocation();
@@ -444,32 +455,33 @@ public class HomeFragment extends BaseFragment {
         banner.setImages(images);//设置图片源
         banner.start();
     }
+
     private void getChatNotice() {
         SimpleDateFormat simpleFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-        String token="";
-        if(MyApplication.isLogin){
-            token=MyApplication.token;
+        String token = "";
+        if (MyApplication.isLogin) {
+            token = MyApplication.token;
         }
         Map<String, Object> params = new HashMap<>();
         params.put("page", 1);
-        HttpProxy.obtain().get(PlatformContans.User.getDynamic, params,token, new ICallBack() {
+        HttpProxy.obtain().get(PlatformContans.User.getDynamic, params, token, new ICallBack() {
             @Override
             public void OnSuccess(String result) {
-                Log.e("getToday",result);
+                Log.e("getToday", result);
                 try {
                     JSONObject jsonObject = new JSONObject(result);
                     JSONArray data = jsonObject.getJSONArray("data");
-                    for (int i = 0; i <data.length() ; i++) {
-                        JSONObject item=data.getJSONObject(i);
-                        ChatNotice coinNotice=new Gson().fromJson(item.toString(),ChatNotice.class);
-                        if(i==0){
+                    for (int i = 0; i < data.length(); i++) {
+                        JSONObject item = data.getJSONObject(i);
+                        ChatNotice coinNotice = new Gson().fromJson(item.toString(), ChatNotice.class);
+                        if (i == 0) {
                             try {
                                 long from = new Date().getTime();
-                                long to=simpleFormat.parse(coinNotice.getCreateTime()).getTime();
-                                int minutes = (int) ((from - to)/(1000 * 60));
-                                if(minutes<60){
+                                long to = simpleFormat.parse(coinNotice.getCreateTime()).getTime();
+                                int minutes = (int) ((from - to) / (1000 * 60));
+                                if (minutes < 60) {
                                     tv_chat.setText(coinNotice.getContent());
-                                    tv_chattime.setText(minutes+"分钟前");
+                                    tv_chattime.setText(minutes + "分钟前");
                                 }
 
                             } catch (ParseException e) {
@@ -486,36 +498,37 @@ public class HomeFragment extends BaseFragment {
 
             @Override
             public void onFailure(String error) {
-                Log.e("getToday",error);
+                Log.e("getToday", error);
             }
         });
     }
+
     private void getCoinNotice() {
         SimpleDateFormat simpleFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-        String token="";
-        if(MyApplication.isLogin){
-            token=MyApplication.token;
+        String token = "";
+        if (MyApplication.isLogin) {
+            token = MyApplication.token;
         }
         Map<String, Object> params = new HashMap<>();
         params.put("page", 1);
-        HttpProxy.obtain().get(PlatformContans.User.getNotice, params,token, new ICallBack() {
+        HttpProxy.obtain().get(PlatformContans.User.getNotice, params, token, new ICallBack() {
             @Override
             public void OnSuccess(String result) {
-                Log.e("getToday",result);
+                Log.e("getToday", result);
                 try {
                     JSONObject jsonObject = new JSONObject(result);
                     JSONArray data = jsonObject.getJSONArray("data");
-                    for (int i = 0; i <data.length() ; i++) {
-                        JSONObject item=data.getJSONObject(i);
-                        CoinNotice coinNotice=new Gson().fromJson(item.toString(),CoinNotice.class);
-                        if(i==0){
+                    for (int i = 0; i < data.length(); i++) {
+                        JSONObject item = data.getJSONObject(i);
+                        CoinNotice coinNotice = new Gson().fromJson(item.toString(), CoinNotice.class);
+                        if (i == 0) {
                             try {
                                 long from = new Date().getTime();
-                                long to=simpleFormat.parse(coinNotice.getCreateTime()).getTime();
-                                int minutes = (int) ((from - to)/(1000 * 60));
-                                if(minutes<60){
+                                long to = simpleFormat.parse(coinNotice.getCreateTime()).getTime();
+                                int minutes = (int) ((from - to) / (1000 * 60));
+                                if (minutes < 60) {
                                     tv_coin.setText(coinNotice.getTitle());
-                                    tv_cointime.setText(minutes+"分钟前");
+                                    tv_cointime.setText(minutes + "分钟前");
                                 }
                             } catch (ParseException e) {
                                 e.printStackTrace();
@@ -530,27 +543,28 @@ public class HomeFragment extends BaseFragment {
 
             @Override
             public void onFailure(String error) {
-                Log.e("getToday",error);
+                Log.e("getToday", error);
             }
         });
     }
+
     private void getWeather(String city) {
         Map<String, Object> params = new HashMap<>();
         params.put("city", city);
-        HttpProxy.obtain().get(PlatformContans.Commom.getTodayTemperatureByCity, params,"", new ICallBack() {
+        HttpProxy.obtain().get(PlatformContans.Commom.getTodayTemperatureByCity, params, "", new ICallBack() {
             @Override
             public void OnSuccess(String result) {
-                Log.e("getToday",result);
+                Log.e("getToday", result);
                 try {
                     JSONObject jsonObject = new JSONObject(result);
                     jsonObject = jsonObject.getJSONObject("data");
                     JSONObject today = jsonObject.getJSONObject("today");
                     Weather weather = new Gson().fromJson(today.toString(), Weather.class);
                     tv_city.setText(weather.getCity());
-                    tv_go.setText(weather.getTravelIndex()+"出行");
-                    tv_wash.setText(weather.getWashIndex()+"洗车");
+                    tv_go.setText(weather.getTravelIndex() + "出行");
+                    tv_wash.setText(weather.getWashIndex() + "洗车");
                     tv_wendu.setText(weather.getTemp());
-                    tv_weather.setText(weather.getWeather()+"/"+weather.getWind()+" "+weather.getTemperature());
+                    tv_weather.setText(weather.getWeather() + "/" + weather.getWind() + " " + weather.getTemperature());
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -558,10 +572,11 @@ public class HomeFragment extends BaseFragment {
 
             @Override
             public void onFailure(String error) {
-                Log.e("getToday",error);
+                Log.e("getToday", error);
             }
         });
     }
+
     private void getHomeImage(int superId) {
         Map<String, Object> params = new HashMap<>();
         params.put("superId", superId);
@@ -592,6 +607,7 @@ public class HomeFragment extends BaseFragment {
             }
         });
     }
+
     private void getImageUrl() {
         HttpProxy.obtain().get(PlatformContans.Commom.getSkipUrl, "", new ICallBack() {
             @Override
@@ -620,6 +636,7 @@ public class HomeFragment extends BaseFragment {
             }
         });
     }
+
     private void getBaner() {
         Map<String, Object> params = new HashMap<>();
         params.put("type", 1);
@@ -656,10 +673,52 @@ public class HomeFragment extends BaseFragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode==8&&data!=null){
+        if (requestCode == 8 && data != null) {
             String city = data.getExtras().getString("city");
             tv_locate.setText(city);
+            getLatlon(city);
         }
+    }
+
+    private void getLatlon(String cityName) {
+
+        GeocodeSearch geocodeSearch = new GeocodeSearch(getContext());
+        GeocodeQuery query = new GeocodeQuery(cityName, null);
+        geocodeSearch.getFromLocationNameAsyn(query);
+        geocodeSearch.setOnGeocodeSearchListener(new GeocodeSearch.OnGeocodeSearchListener() {
+            @Override
+            public void onRegeocodeSearched(RegeocodeResult result, int i) {
+
+            }
+
+            @Override
+            public void onGeocodeSearched(GeocodeResult result, int i) {
+                if (i == 1000) {
+                    if (result != null && result.getGeocodeAddressList() != null
+                            && result.getGeocodeAddressList().size() > 0) {
+                        GeocodeAddress address = result.getGeocodeAddressList().get(0);
+                        Log.e("adress",address.getFormatAddress());
+                        double latitude = address.getLatLonPoint().getLatitude();
+                        double longitude = address.getLatLonPoint().getLongitude();
+                        MyApplication.getaMapLocation().setLatitude(latitude);
+                        MyApplication.getaMapLocation().setLongitude(longitude);
+                        MyApplication.getaMapLocation().setAddress(address.getFormatAddress());
+                        MyApplication.getaMapLocation().setProvince(address.getProvince());
+                        MyApplication.getaMapLocation().setCity(address.getCity());
+                        MyApplication.getaMapLocation().setDistrict(address.getDistrict());
+                        MyApplication.getaMapLocation().setAdCode(address.getAdcode());
+
+
+                    } else {
+                    }
+                } else {
+
+                }
+
+            }
+        });
+
+
     }
 
     private void init() {
@@ -679,7 +738,7 @@ public class HomeFragment extends BaseFragment {
             @Override
             public void onClick(View v) {
                 Intent intent3 = new Intent(getContext(), WebviewActivity.class);
-                intent3.putExtra("url", "http://www.yunchebao.com:8080/weather/?city="+MyApplication.getaMapLocation().getCity());
+                intent3.putExtra("url", "http://www.yunchebao.com:8080/weather/?city=" + MyApplication.getaMapLocation().getCity());
                 startActivity(intent3);
             }
         });
@@ -711,12 +770,12 @@ public class HomeFragment extends BaseFragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent3 = new Intent(getContext(), WebviewActivity.class);
-                String url=mHomeImages.get(position).getUrl();
-                if(!url.contains("http://")&&!url.contains("https://")){
-                    if(url.contains("www")){
-                        url="http://"+url;
-                    }else{
-                        url="http://www."+url;
+                String url = mHomeImages.get(position).getUrl();
+                if (!url.contains("http://") && !url.contains("https://")) {
+                    if (url.contains("www")) {
+                        url = "http://" + url;
+                    } else {
+                        url = "http://www." + url;
                     }
                 }
                 intent3.putExtra("url", url);
@@ -732,9 +791,9 @@ public class HomeFragment extends BaseFragment {
         ll_item3.setSelected(false);
     }
 
-    @OnClick({R.id.ll_locate,R.id.messenger_icon,R.id.menuLayDrive,R.id.rl_notice,R.id.search_lay, R.id.menuLay1, R.id.menuLay2, R.id.menuLay3, R.id.menuLay4, R.id.menuLay7, R.id.menuLay5, R.id.menuLay6, R.id.menuLay8, R.id.menuLay9, R.id.menuLay10, R.id.user_center_icon})
+    @OnClick({R.id.ll_locate, R.id.messenger_icon, R.id.menuLayDrive, R.id.rl_notice, R.id.search_lay, R.id.menuLay1, R.id.menuLay2, R.id.menuLay3, R.id.menuLay4, R.id.menuLay7, R.id.menuLay5, R.id.menuLay6, R.id.menuLay8, R.id.menuLay9, R.id.menuLay10, R.id.user_center_icon})
     public void OnClick(View v) {
-        Intent intent2=new Intent(getContext(), NewWashRepairActivity.class);
+        Intent intent2 = new Intent(getContext(), NewWashRepairActivity.class);
         switch (v.getId()) {
             case R.id.ll_locate:
                 startActivityForResult(new Intent(getContext(), CityListActivity.class), 8);
@@ -762,31 +821,31 @@ public class HomeFragment extends BaseFragment {
                 }
                 break;
             case R.id.menuLay1://洗车店
-                intent2.putExtra("type",1);
+                intent2.putExtra("type", 1);
                 startActivity(intent2);
                 break;
             case R.id.menuLay2://修理店
-                intent2.putExtra("type",2);
+                intent2.putExtra("type", 2);
                 startActivity(intent2);
                 break;
             case R.id.menuLay3://4S店
-                startActivity(new Intent(getContext(),NewFourShopActivity.class));
+                startActivity(new Intent(getContext(), NewFourShopActivity.class));
                 //ActivityAnimationUtils.commonTransition(get, NewFourShopActivity.class, ActivityConstans.Animation.FADE);
                 break;
             case R.id.menuLay4://驾校汇
-                startActivity(new Intent(getContext(),NewDrvingActivity.class));
+                startActivity(new Intent(getContext(), NewDrvingActivity.class));
                 //startActivity(new Intent(getContext(), NewDrvingActivity.class));
                 break;
             case R.id.menuLay5:///约单
-                startActivity(new Intent(getContext(),YuedanHomeActivity.class));
+                startActivity(new Intent(getContext(), YuedanHomeActivity.class));
                 //ActivityAnimationUtils.commonTransition(getActivity(), YuedanHomeActivity.class, ActivityConstans.Animation.FADE);
                 break;
             case R.id.menuLay6://加油站
-                startActivity(new Intent(getContext(),GasStationActivity.class));
-                 //ActivityAnimationUtils.commonTransition(getActivity(), GasStationActivity.class, ActivityConstans.Animation.FADE);
+                startActivity(new Intent(getContext(), GasStationActivity.class));
+                //ActivityAnimationUtils.commonTransition(getActivity(), GasStationActivity.class, ActivityConstans.Animation.FADE);
                 break;
             case R.id.menuLay7://紧急
-                startActivity(new Intent(getContext(),NewRoadhelpActivity.class));
+                startActivity(new Intent(getContext(), NewRoadhelpActivity.class));
                 //ActivityAnimationUtils.commonTransition(getActivity(), NewRoadhelpActivity.class, ActivityConstans.Animation.FADE);
                 //ActivityAnimationUtils.commonTransition(getActivity(), RoadAssistanceListActivity.class, ActivityConstans.Animation.FADE);
                 break;
@@ -807,8 +866,8 @@ public class HomeFragment extends BaseFragment {
 
             case R.id.user_center_icon://个人中心
                 if (MyApplication.isLogin)
-                    startActivity(new Intent(getContext(),UserCenterActivity.class));
-                   // ActivityAnimationUtils.commonTransition(getActivity(), UserCenterActivity.class, ActivityConstans.Animation.FADE);
+                    startActivity(new Intent(getContext(), UserCenterActivity.class));
+                    // ActivityAnimationUtils.commonTransition(getActivity(), UserCenterActivity.class, ActivityConstans.Animation.FADE);
                 else {
                     startActivity(new Intent(getContext(), RegisterActivity.class));
                 }

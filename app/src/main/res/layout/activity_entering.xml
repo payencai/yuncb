@@ -356,6 +356,14 @@
                         android:textSize="14sp" />
 
                 </LinearLayout>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="4dp"
+                    android:paddingBottom="12dp"
+                    android:text="请输入4-24位的账号，可包含数字或英文字母(区分大小写)默认密码为123456，此账号用于登录管理端"
+                    android:textColor="@color/gray_99"
+                    android:textSize="12sp" />
 
                 <View
                     android:layout_width="match_parent"
@@ -393,14 +401,6 @@
                         android:src="@mipmap/arrow_right" />
 
                 </LinearLayout>
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="4dp"
-                    android:paddingBottom="12dp"
-                    android:text="请输入4-24位的账号，可包含数字或英文字母(区分大小写)默认密码为123456，此账号用于登录管理端"
-                    android:textColor="@color/gray_99"
-                    android:textSize="12sp" />
 
 
 

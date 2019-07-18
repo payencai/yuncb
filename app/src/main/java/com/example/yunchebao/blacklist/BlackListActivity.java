@@ -1,5 +1,6 @@
 package com.example.yunchebao.blacklist;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,6 +14,9 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.costans.PlatformContans;
 import com.entity.UserMsg;
 import com.example.yunchebao.R;
+import com.example.yunchebao.rongcloud.activity.StrangerDelActivity;
+import com.example.yunchebao.rongcloud.activity.contact.FriendDetailActivity;
+import com.example.yunchebao.rongcloud.activity.contact.GroupDetailActivity;
 import com.google.gson.Gson;
 import com.gyf.immersionbar.ImmersionBar;
 import com.http.HttpProxy;
@@ -21,6 +25,7 @@ import com.lljjcoder.style.citylist.Toast.ToastUtils;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
+import com.tool.CheckDoubleClick;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -88,10 +93,52 @@ public class BlackListActivity extends AppCompatActivity {
                 }
             }
         });
+        BlackuserAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                if(CheckDoubleClick.isFastDoubleClick()){
+                    return;
+                }
+                BlackUser blackUser= (BlackUser) adapter.getItem(position);
+                getPrivateDetail(blackUser.getUserId());
+            }
+        });
         rv_black.setLayoutManager(new LinearLayoutManager(this));
         rv_black.setAdapter(BlackuserAdapter);
         getData();
 
+    }
+    private void getPrivateDetail(String id) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("userId", id);
+        HttpProxy.obtain().get(PlatformContans.User.getUserResultById, params, MyApplication.token, new ICallBack() {
+            @Override
+            public void OnSuccess(String result) {
+                Log.e("detail", result);
+                try {
+                    JSONObject jsonObject = new JSONObject(result);
+                    JSONObject data = jsonObject.getJSONObject("data");
+                    UserMsg userMsg = new Gson().fromJson(data.toString(), UserMsg.class);
+                    Intent intent;
+                    if ("1".equals(userMsg.getIsFriend())) {
+                        intent = new Intent(BlackListActivity.this, FriendDetailActivity.class);
+                        intent.putExtra("id", id);
+                        startActivity(intent);
+                    } else {
+                        intent = new Intent(BlackListActivity.this, StrangerDelActivity.class);
+                        intent.putExtra("id", id);
+                        startActivity(intent);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(String error) {
+
+            }
+        });
     }
     private void getData(){
         RongIM.getInstance().getBlacklist(new RongIMClient.GetBlacklistCallback() {

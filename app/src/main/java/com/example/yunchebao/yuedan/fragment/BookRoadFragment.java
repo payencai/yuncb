@@ -27,6 +27,7 @@ import com.example.yunchebao.MyApplication;
 import com.costans.PlatformContans;
 import com.example.yunchebao.R;
 import com.example.yunchebao.yuedan.SelectCarTypeActivity;
+import com.google.gson.Gson;
 import com.http.HttpProxy;
 import com.http.ICallBack;
 import com.payencai.library.mediapicker.PickerActivity;
@@ -42,9 +43,11 @@ import com.tool.WheelView;
 import com.tool.view.GridViewForScrollView;
 import com.vipcenter.RegisterActivity;
 import com.example.yunchebao.yuedan.adapter.ImageAdapter;
+import com.vipcenter.model.MyCar;
 import com.zhihu.matisse.Matisse;
 import com.zhihu.matisse.MimeType;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -90,8 +93,8 @@ public class BookRoadFragment extends Fragment {
     EditText et_detail;
     @BindView(R.id.et_color)
     EditText et_color;
-    @BindView(R.id.et_type)
-    TextView et_type;
+    @BindView(R.id.tv_type)
+    TextView tv_type;
     @BindView(R.id.rl_cartype)
     RelativeLayout rl_cartype;
     @BindView(R.id.addressLay)
@@ -195,7 +198,7 @@ public class BookRoadFragment extends Fragment {
         }
         if (requestCode == 1 && data != null) {
             carCategory = data.getStringExtra("name");
-            et_type.setText(carCategory);
+            tv_type.setText(carCategory);
         }
         if (requestCode == 3 && data != null) {
             defaultSelect = data.getParcelableArrayListExtra(PickerConfig.EXTRA_RESULT);
@@ -451,9 +454,7 @@ public class BookRoadFragment extends Fragment {
                 showSelectCount();
             }
         });
-        if(MyApplication.getUserInfo().getCarList().size()>0){
-            et_type.setText(MyApplication.getUserInfo().getCarList().get(0).getModels());
-        }
+
         rl_cartype.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -477,6 +478,40 @@ public class BookRoadFragment extends Fragment {
                 }
             }
         });
+        getDefaultCar();
+    }
+    private void getDefaultCar() {
+        HttpProxy.obtain().post(PlatformContans.DrivingLicense.getApplicationByUserId, MyApplication.token, "", new ICallBack() {
+            @Override
+            public void OnSuccess(String result) {
+                Log.e("mycar", result);
+                try {
+                    JSONObject jsonObject = new JSONObject(result);
+                    JSONArray data = jsonObject.getJSONArray("data");
+                    for (int i = 0; i < data.length(); i++) {
+                        JSONObject item = data.getJSONObject(i);
+                        MyCar myCar = new Gson().fromJson(item.toString(), MyCar.class);
+                        if(myCar.getType()==2&&myCar.getIsDefault()==1){
+                            tv_type.setText(myCar.getModels());
+                            break;
+                        }else{
+                            if(myCar.getType()==2){
+                                tv_type.setText(myCar.getModels());
+                                break;
+                            }
+                        }
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(String error) {
+
+            }
+        });
     }
 
     private void addService() {
@@ -486,7 +521,7 @@ public class BookRoadFragment extends Fragment {
         Map<String, Object> params = new HashMap<>();
         params.put("telephone", et_phone.getEditableText().toString());
         params.put("detail", et_detail.getEditableText().toString());
-        params.put("carCategory", et_type.getText().toString());
+        params.put("carCategory", tv_type.getText().toString());
         params.put("province", mAddressBean.getProvince() + "");
         params.put("color", et_color.getEditableText().toString());
         params.put("city", mAddressBean.getCityname() + "");

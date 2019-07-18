@@ -52,6 +52,7 @@ import com.tool.view.GridViewForScrollView;
 import com.vipcenter.RegisterActivity;
 import com.example.yunchebao.yuedan.model.WashCarType;
 import com.example.yunchebao.yuedan.adapter.ImageAdapter;
+import com.vipcenter.model.MyCar;
 import com.zhihu.matisse.Matisse;
 import com.zhihu.matisse.MimeType;
 
@@ -659,6 +660,40 @@ public class BookRepairFragment extends BaseFragment implements OnDateSetListene
             tv_cartype.setText(MyApplication.getUserInfo().getCarList().get(0).getModels());
         }
         getData();
+        getDefaultCar();
+    }
+    private void getDefaultCar() {
+        HttpProxy.obtain().post(PlatformContans.DrivingLicense.getApplicationByUserId, MyApplication.token, "", new ICallBack() {
+            @Override
+            public void OnSuccess(String result) {
+                Log.e("mycar", result);
+                try {
+                    JSONObject jsonObject = new JSONObject(result);
+                    JSONArray data = jsonObject.getJSONArray("data");
+                    for (int i = 0; i < data.length(); i++) {
+                        JSONObject item = data.getJSONObject(i);
+                        MyCar myCar = new Gson().fromJson(item.toString(), MyCar.class);
+                        if(myCar.getType()==2&&myCar.getIsDefault()==1){
+                            tv_cartype.setText(myCar.getModels());
+                            break;
+                        }else{
+                            if(myCar.getType()==2){
+                                tv_cartype.setText(myCar.getModels());
+                                break;
+                            }
+                        }
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(String error) {
+
+            }
+        });
     }
 
     private boolean checkInput() {
